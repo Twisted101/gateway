@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../../public/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../public/css/bootstrap-table.min.css" />
+	<link rel="stylesheet" href="../../css/index.css" />
+	<link rel="stylesheet" href="../../css/bootstrap-table-update.css" />
+	<link rel="stylesheet" href="../../systemTools/publicCSS/publicCSS.css" />
+	<link rel="stylesheet" href="../../systemTools/serialHelper/css/serialHelper.css" />
+
+	<body>
+		<div class="modal fade" tabindex="-1" id="serialHelperModal" data-backdrop="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click:closeModal">
+							<span class="white">&times;</span>
+						</button>
+							<span>串口助手</span>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-8">
+								<div>
+									<div>
+										<textarea id="serialHelpRecvTextarea" placeholder="接收区" data-bind="value:serialHelpRecvTextarea"></textarea>
+									</div>
+								</div>
+								<div>
+									<div>
+										<textarea id="serialHelpSendTextarea" placeholder="发送区" data-bind="value:serialHelpSendTextarea"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div>
+									<div class="row">
+										<div class="col-xs-8">
+											<span>显示接收时间</span>
+										</div>
+										<div class="col-xs-2">
+											<input type="checkbox" data-bind="checked: showRecvTime" />
+										</div>
+									</div>
+									<div>
+										<!--<select id="serialHelpSelect" class="form-contro" data-bind="options: undfan.interfaceRealData.interfaceList, optionsText:'interfaceName', optionsValue:'interfaceId', value: interfaceId"></select>-->
+									</div>
+									<button class="btn  btn-default btn-block" data-bind="click:clearRecv">清空接收区</button>
+									<button class="btn btn-default btn-block" data-bind="click:clearSend">清空发送区</button>
+									<button class="btn  btn-default btn-block" data-bind="click:sendData">发送</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click:closeModal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../public/js/jquery-3.1.1.min.js"></script>
+	<script src="../../public/js/bootstrap.min.js"></script>
+	<script src="../../public/js/knockout-3.4.1.js"></script>
+
+	<script src="../../systemTools/serialHelper/js/serialHelper.js"></script>
+
+</html>

@@ -1,0 +1,37 @@
+[
+	{
+		"Code": "FlowRateStatus",
+		"DataType": "int",
+		"DisplayType": "Default",
+		"IsStore": false,
+		"Name": "当前风速",
+		"Period": 0,
+		"Precision": 0,
+		"RWFlag": "ReadOnly",
+		"RangeFilter": 0,
+		"RangeMax": 0,
+		"RangeMin": 0,
+		"SlopeFilter": 0,
+		"SlopeMax": 0,
+		"SlopeMin": 0,
+		"Type": "Custom",
+		"Unit": "无"
+	}, {
+		"Code": "RSSI",
+		"DataType": "int",
+		"DisplayType": "Default",
+		"IsStore": true,
+		"Name": "信号强度",
+		"Period": 0,
+		"Precision": 0,
+		"RWFlag": "ReadOnly",
+		"RangeFilter": 0,
+		"RangeMax": 0,
+		"RangeMin": 0,
+		"SlopeFilter": 0,
+		"SlopeMax": 0,
+		"SlopeMin": 0,
+		"Type": "Custom",
+		"Unit": "无"
+	}
+]

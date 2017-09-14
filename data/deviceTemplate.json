@@ -1,0 +1,17 @@
+[
+	{
+		"DeviceCode": "VirtualDevice",
+		"DeviceType": "VirtualDevice",
+		"Name": "虚拟设备模板",
+		"DeviceName": "虚拟设备",
+		"Remark": "备注信息1",
+		"Id": "11"
+	}, {
+		"deviceCode": "hentong",
+		"DeviceType": "SerialDevice",
+		"Name": "hentong",
+		"DeviceName": "设备型号2",
+		"Remark": "备注信息2",
+		"Id": "22"
+	}
+]

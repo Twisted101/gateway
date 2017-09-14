@@ -1,0 +1,165 @@
+/*******hisLogManager********/
+
+.hisLogManager>div {
+	margin: 8px 0 15px 0;
+}
+
+.hisLogManager>.btn-group {
+	float: right;
+	margin-right: 20px;
+}
+
+.realLogManager .btngroup {
+	margin-bottom: 15px;
+}
+
+.realLogManager .btngroup .btn-success,
+.realLogManager .btngroup .btn-info {
+	margin-right: 10px;
+}
+
+
+/*******interfaceRealData********/
+
+#toolbar button.choose-port {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#toolbar .dropdown-menu>li>a {
+	padding: 3px 10px 3px 25px;
+}
+
+i.if-check-square-o:before {
+	content: '\e63d';
+	color: #222;
+	font-size: 14px;
+	cursor: pointer;
+	font-weight: 400;
+}
+
+i.if-square-o:before {
+	content: '\e63e';
+	color: #222;
+	font-size: 14px;
+	cursor: pointer;
+	font-weight: 400;
+}
+
+
+/*******systemTools********/
+
+#iframeDom {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 2000;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+div.systemDiv>div {
+	margin: 10px 0 30px 0;
+}
+
+i.systemI {
+	font-size: 100px;
+	cursor: pointer;
+	text-align: center;
+	display: block;
+	height: 150px;
+}
+
+i.restartSG {
+	padding-top: 1px;
+}
+
+i.serchHistData {
+	padding-top: 5px;
+}
+
+i.restartSG:before {
+	content: '\e753';
+	color: #DF93C3;
+}
+
+i.restartSGServer:before {
+	content: '\e60c';
+	color: #FFD3A8;
+}
+
+i.sysUpdate:before {
+	content: '\e6ce';
+	color: #85BBC7;
+}
+
+i.serchHistData:before {
+	content: '\e62a';
+	color: #DDF6A2;
+}
+
+i.serialHelper:before {
+	content: '\e65a';
+	color: #929DD1;
+}
+
+i.backupsData:before {
+	content: '\e65b';
+	color: #FBA6AC;
+}
+
+i.recoveryData:before {
+	content: '\e601';
+	color: #FFD3A8;
+}
+
+p.systemP {
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 0;
+	vertical-align: bottom;
+	border-bottom: 1px solid #eee;
+}
+
+
+/*******systemInfo********/
+
+div.infoText {
+	float: right;
+}
+
+div.infoPic i.iconfont {
+	position: absolute;
+	left: 40%;
+	top: -15px;
+}
+
+.infoPic i.iconfont:before {
+	content: "\e603";
+	font-size: 100px;
+	color: #78ADD9;
+}
+
+@media screen and (max-width: 520px) {
+	div.infoPic {
+		display: none;
+	}
+	div.infoText {
+		width: 100%;
+	}
+}
+
+
+/*******deviceManager********/
+
+#delete_variant {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}

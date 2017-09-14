@@ -1,0 +1,462 @@
+<script type="text/html" id="template-deviceManager">
+	<div>
+		<div class="content-header">
+			<span>设备管理</span>
+		</div>
+		<div id="toolbar" class="btn-group">
+			<button class="btn btn-default dropdown-toggle choose-port" data-bind="" data-toggle="dropdown">
+				<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="color:#286090"></span>
+				&nbsp;在线筛选-<span data-bind="text:undfan.deviceManager.bOnlineShow"></span>&nbsp;&nbsp;<span class="caret"></span>
+			</button>
+			<button id="add_variant" type="button" class="btn btn-default" data-bind="click: undfan.deviceManager.addDeviceManager"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#286090"></span>&nbsp;添加变量</button>
+			<button id="edit_variant" class='btn btn-default' data-bind="click: undfan.deviceManager.editDeviceManager"><span class='glyphicon glyphicon-pencil' style='color:#28b779'></span>&nbsp;编辑变量 </button>
+			<button id="delete_variant" class='btn btn-default' data-bind="click: undfan.deviceManager.deleteDeviceManager"><span class='glyphicon glyphicon-remove' style='color:#d9534f'></span>&nbsp;删除 </button>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="#" data-bind="click: undfan.deviceManager.chooseOnline">
+						<!-- ko if: undfan.deviceManager.onlineSelected-->
+						<i class="if if-check-square-o iconfont"></i>
+						<!-- /ko -->
+						<!-- ko ifnot: undfan.deviceManager.onlineSelected-->
+						<i class="if if-square-o iconfont"></i>
+						<!-- /ko -->
+						<span>在线</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" data-bind="click: undfan.deviceManager.chooseOutline">
+						<!-- ko if: undfan.deviceManager.outlineSelected-->
+						<i class="if if-check-square-o iconfont"></i>
+						<!-- /ko -->
+						<!-- ko ifnot: undfan.deviceManager.outlineSelected-->
+						<i class="if if-square-o iconfont"></i>
+						<!-- /ko -->
+						<span>离线</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" data-bind="click: undfan.deviceManager.chooseAll">
+						<!-- ko if: undfan.deviceManager.allSelected-->
+						<i class="if if-check-square-o iconfont"></i>
+						<!-- /ko -->
+						<!-- ko ifnot: undfan.deviceManager.allSelected-->
+						<i class="if if-square-o iconfont"></i>
+						<!-- /ko -->
+						<span>全部</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<table id="devicemanagertable" 
+			data-click-to-select="true" 
+			data-url="./data/deviceManager.json" 
+			data-pagination="true" 
+			data-show-toggle="true" 
+			data-show-columns="true" 
+			data-sortable="true" 
+			data-side-pagination="client"
+			data-silent-sort="false" 
+			data-striped="true" 
+			data-click-to-select="false" 
+			data-cache="false" 
+			data-content-type="application/json" 
+			data-query-params="paginationParam" 
+			data-page-number="1" 
+			data-page-size="20" 
+			data-page-list="[10,20,30,40,50,100]" 
+			data-resizable="true" 
+			data-unique-id="Id" 
+			data-maintain-selected="true" 
+			data-toolbar="#toolbar">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th data-field="Id" data-visible="false" data-switchable="false">Id</th>
+					<th data-field="Name" data-sortable="true" data-formatter="mergeName">设备名称</th>
+					<th data-field="InterfaceName" data-sortable="true">接口</th>
+					<th data-field="TemplateName" data-sortable="true">设备模板</th>
+					<th data-field="MeterNumber" data-sortable="true">表号</th>
+					<th data-field="Period">采集周期(秒)</th>
+					<th data-field="Timeout">离线超时(秒)</th>
+					<th data-field="InstallAddress" data-visible="false">安装地址</th>
+					<th data-field="Remark" data-visible="false">备注信息</th>
+					<th data-events="operateEvents" data-formatter="<span class='glyphicon glyphicon-zoom-in check-device'></span>" data-align="center">查看</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>
+<!--添加设备管理的弹出框-->
+<script type="text/html" id="template-addDeviceManager-modal">
+	<div class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<span class="white">&times;</span>
+						</button>
+						<span data-bind="text: title"></span>
+					</div>
+				</div>
+				<div class="modal-body" style="padding-left:50px;">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备名称</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: Name, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: Name.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: Name.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: Name.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">表号</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: MeterNumber, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: MeterNumber.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: MeterNumber.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: MeterNumber.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">接口</label>
+						<select data-bind="options: undfan.serialSetting.serialDataList, optionsText:'name', optionsValue:'interfaceId', value: InterfaceId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备模板</label>
+						<select data-bind="options: undfan.deviceTemplate.deviceTemplateList, optionsText:'name', optionsValue:'id', value: TemplateId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">采集周期</label>
+						<input type="text" class="col-xs-offset-1 col-xs-8 col-md-offset-0 col-md-6" data-bind="value: Period, valueUpdate: 'keyup'" />
+						<span class="col-xs-1 control-label " style="text-align:left ;color:green">秒</span>
+						<div class="col-xs-1 control-tip">
+							<!-- ko ifnot: Period.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: Period.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: Period.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">离线超时</label>
+						<input type="text" class="col-xs-offset-1 col-xs-8 col-md-offset-0 col-md-6" data-bind="value: Timeout, valueUpdate: 'keyup'" />
+						<span class="col-xs-1 control-label " style="text-align:left ;color:green">秒</span>
+						<div class="col-xs-1 control-tip">
+							<!-- ko ifnot: Timeout.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: Timeout.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: Timeout.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">安装地址</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: InstallAddress, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: InstallAddress.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: InstallAddress.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: Remark, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: Remark.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: Remark.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">
+						<i class="icon-remove"></i>
+						取消
+					</button>
+					<button data-bind="click: btnOk, css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						<i class="icon-ok"></i>
+						确定
+					</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /#modal-add-device -->
+	<!-- 添加设备的弹出框 -->
+</script>
+<!--/添加设备管理的弹出框-->
+<!--编辑设备管理的弹出框-->
+<script type="text/html" id="template-editDeviceManager-modal">
+	<div class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<span class="white">&times;</span>
+						</button>
+						<span data-bind="text: title"></span>
+					</div>
+				</div>
+
+				<div class="modal-body" style="padding-left:50px;">
+					<!-- 编辑一个变量 -->
+					<!-- ko if: isEditOne -->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备名称</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.Name, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editItem.Name.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editItem.Name.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editItem.Name.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">表号</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.MeterNumber, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editItem.MeterNumber.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editItem.MeterNumber.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editItem.MeterNumber.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">接口</label>
+						<select data-bind="options: undfan.serialSetting.serialDataList, optionsText:'interfaceName', optionsValue:'interfaceId', value: editItem.InterfaceId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备模板</label>
+						<select data-bind="options: undfan.deviceTemplate.deviceTemplateList, optionsText:'Name', optionsValue:'id', value: editItem.TemplateId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">采集周期</label>
+						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: editItem.Period, valueUpdate: 'keyup'" />
+						<div class="col-xs-1 control-tip">
+							<!-- ko ifnot: editItem.Period.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editItem.Period.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editItem.Period.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+						<span class="col-xs-2 control-label " style="text-align:left ;color:green">秒</span>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">离线超时</label>
+						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: editItem.Timeout, valueUpdate: 'keyup'" />
+						<div class="col-xs-1 control-tip">
+							<!-- ko ifnot: editItem.Timeout.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editItem.Timeout.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editItem.Timeout.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+						<span class="col-xs-2 control-label " style="text-align:left ;color:green">秒</span>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">安装地址</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.InstallAddress, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+							<!-- ko if: editItem.InstallAddress.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editItem.InstallAddress.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.Remark, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: editItem.Remark.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editItem.Remark.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+
+					<!-- 编辑多个个变量 -->
+					<!-- ko ifnot: isEditOne -->
+					<div class="row" style="line-height: 30px;">
+						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditPeriod" type="checkbox">
+						<label class="control-label col-xs-10 col-md-3 align-left">采集周期</label>
+						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: multipleEditPeriod, valueUpdate: 'keyup'" />
+						<div class="col-xs-1 control-tip">
+							<!-- ko ifnot: multipleEditPeriod.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: multipleEditPeriod.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditPeriod.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+						<span class="col-xs-2 control-label " style="text-align:left ;color:green;">秒</span>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditTimeout" type="checkbox">
+						<label class="control-label col-xs-10 col-md-3 align-left">离线超时</label>
+						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: multipleEditTimeout, valueUpdate: 'keyup'" />
+						<div class=" col-xs-1 control-tip">
+							<!-- ko ifnot: multipleEditTimeout.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: multipleEditTimeout.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditTimeout.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+						<span class="col-xs-2 control-label " style="text-align:left;">秒</span>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditInstallAddress" type="checkbox">
+						<label class="control-label col-xs-10 col-md-3 align-left">安装地址</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditInstallAddress, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: multipleEditInstallAddress.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditInstallAddress.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditRemark" type="checkbox">
+						<label class="control-label col-xs-10 col-md-3 align-left">备注信息</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditRemark, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+							<!-- ko if: multipleEditRemark.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditRemark.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+				</div>
+
+				<div class="modal-footer no-margin-top">
+					<span style="float:left" data-bind="text:remind"></span>
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">
+						<i class="icon-remove"></i>
+						取消
+					</button>
+					<button data-bind="click: btnOk, css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						<i class="icon-ok"></i>
+						确定
+					</button>
+
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /#modal-add-device -->
+	<!-- 编辑设备的弹出框 -->
+</script>
+<!--/编辑设备管理的弹出框-->
+<!--删除设备管理的弹出框-->
+<script type="text/html" id="template-deleteDeviceManager-modal">
+	<div class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<span class="white">&times;</span>
+						</button>
+						<span data-bind="text: title"></span>
+					</div>
+				</div>
+
+				<div class="modal-body" style="padding-left:50px;">
+					<div class="row">
+						<span>确定要删除</span>
+						<span style="color:red">选中的设备</span>
+						<span>吗？</span>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">
+						<i class="icon-remove"></i>
+						取消
+					</button>
+					<button data-bind="click: btnOk" class="btn btn-sm btn-success" data-dismiss="modal">
+						<i class="icon-ok"></i>
+						确定
+					</button>
+
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /#modal-add-device -->
+</script>
+<!--/删除设备管理的弹出框-->

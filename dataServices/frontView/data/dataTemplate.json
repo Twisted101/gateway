@@ -1,0 +1,23 @@
+[
+	{
+		"devTemplate": "智能温控器传输模板",
+		"id": 1385388096,
+		"idTemplate": 1,
+		"remark": "备注一"
+	}, {
+		"devTemplate": "恒通预付费传输模板",
+		"id": 1385392193,
+		"idTemplate": 2,
+		"remark": "备注二"
+	}, {
+		"devTemplate": "SmartAC",
+		"id": 1481709581,
+		"idTemplate": 1481195539,
+		"remark": "备注三"
+	}, {
+		"devTemplate": "恒通三相预付费传输模板",
+		"id": 1589524548,
+		"idTemplate": 1589448720,
+		"remark": "备注四"
+	}
+]

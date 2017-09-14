@@ -1,0 +1,506 @@
+<!--采集接口-->
+<!--添加模态框-->
+<script type="text/html" id="template-addSerialInterface-modal">
+	<div class="modal fade bs-example-modal-sm" id="addSerialInterface" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>添加采集接口</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">接口名称:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacename,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: interfacename.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: interfacename.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfacename.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">串口类型:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacetype">
+							<option value="localSerial">本地串口</option>
+							<option value="tcpServerToSerial">TCP服务器</option>
+							<option value="tcpClientToSerial">TCP客户端</option>
+							<option value="udpToserial">UDP</option>
+						</select>
+					</div>
+					<!--本地串口-->
+					<!--ko if:interfacetype()=="localSerial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">绑定串口:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options: undfan.serialSetting.serialDataList(), optionsText:'name', optionsValue:'Id', value: interfacedeviceid">
+						</select>
+					</div>
+					<!-- /ko -->
+					<!--TCP服务器-->
+					
+					<!--ko if:interfacetype()=="tcpServerToSerial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">本地端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:localport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: localport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: localport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: localport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+					<!--TCP客户端-->
+					<!--ko if:interfacetype()=="tcpClientToSerial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的IP:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteip,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteip.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteip.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteip.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+					<!--UDP-->
+					<!--ko if:interfacetype()=="udpToserial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">本地端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:localport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: localport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: localport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: localport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的IP:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteip,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteip.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteip.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteip.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">命令间隔:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacecmdinterval,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: interfacecmdinterval.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: interfacecmdinterval.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfacecmdinterval.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">通讯超时:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacetimeout,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: interfacetimeout.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: interfacetimeout.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfacetimeout.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfaceremark,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: interfaceremark.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfaceremark.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button data-bind="click: btnOk.bind($data),css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/添加模态框-->
+<!--修改模态框-->
+<script type="text/html" id="template-editSerialInterface-modal">
+	<div class="modal fade bs-example-modal-sm" id="editSerialInterface" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>修改网口设置</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">接口名称:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacename,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: interfacename.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: interfacename.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfacename.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px; display: none;">
+						<label class="control-label col-xs-12 col-md-3 align-left">串口类型:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacetype">
+							<option value="localSerial">本地串口</option>
+							<option value="tcpServerToSerial">TCP服务器</option>
+							<option value="tcpClientToSerial">TCP客户端</option>
+							<option value="udpToserial">UDP</option>
+						</select>
+					</div>
+					<!--本地串口-->
+					<!--ko if:interfacetype()=="localSerial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">绑定串口:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options: undfan.serialSetting.serialDataList(), optionsText:'name', optionsValue:'Id', value: interfacedeviceid">
+						</select>
+					</div>
+					<!-- /ko -->
+					<!--TCP服务器-->
+					<!--ko if:interfacetype()=="tcpClientToSerial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">本地端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:localport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: localport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: localport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: localport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+					<!--TCP客户端-->
+					<!--ko if:interfacetype()=="tcpServerToSerial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的IP:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteip,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteip.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteip.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteip.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+					<!--UDP-->
+					<!--ko if:interfacetype()=="udpToserial"-->
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">本地端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:localport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: localport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: localport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: localport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的IP:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteip,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteip.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteip.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteip.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">目的端口:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remoteport,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: remoteport.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: remoteport.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remoteport.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">命令间隔:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacecmdinterval,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: interfacecmdinterval.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: interfacecmdinterval.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfacecmdinterval.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">通讯超时:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfacetimeout,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: interfacetimeout.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: interfacetimeout.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfacetimeout.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:interfaceremark,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: interfaceremark.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: interfaceremark.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button data-bind="click: btnOk.bind($data),css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</script>
+<!--/修改模态框-->
+<!--确认删除模态框-->
+<script type="text/html" id="template-deleteSerialInterface-modal">
+	<div class="modal fade bs-example-modal-sm" id="deleteSerialInterface" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>删除接口确认</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<span>确认要删除</span>
+						<span data-bind="text:deleteName" style="color:red"></span>
+						<span>吗？</span>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button class="btn btn-sm btn-success" data-dismiss="modal" data-bind="click:btnOk">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/确认删除模态框-->
+<script type="text/html" id="template-serialInterface">
+	<div class="content-header">
+		<span>采集接口</span>
+		<button class="btn btn-primary" data-bind="click:undfan.serialInterface.add.bind($data)">添加采集接口</button>
+	</div>
+	<div class="row">
+		<!-- ko foreach: undfan.serialInterface.interfaceDataList -->
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="undfan-ibox">
+				<div class="undfan-ibox-title">
+					<div class="undfan-ibox-icon">
+						<span class="icon-name" data-bind="text:interfacename"></span>
+					</div>
+					<div class="undfan-ibox-tools">
+						<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-toggle="" data-target="#editSerialInterface" data-bind="click: undfan.serialInterface.edit.bind($data)"></span>&nbsp;&nbsp;
+						<span class="glyphicon glyphicon-trash undfan-ibox-trash" title="删除" data-toggle="modal" data-target="#deleteModal" data-bind="click: undfan.serialInterface.delete.bind($data)"></span>
+					</div>
+				</div>
+				<div class="undfan-ibox-content">
+					<div class="row">
+						<span class="col-xs-4 control-label">串口类型:</span>
+						<span class="col-xs-7 control-label">
+							<!--ko if:interfacetype()=='localSerial'-->
+							本地串口
+							<!--/ko-->
+							<!--ko if:interfacetype()=='tcpServerToSerial'-->
+							TCP服务器
+							<!--/ko-->
+							<!--ko if:interfacetype()=='tcpClientToSerial'-->
+							TCP客户端
+							<!--/ko-->	
+							<!--ko if:interfacetype()=='udpToserial'-->
+							UDP
+							<!--/ko-->	
+						</span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">命令间隔:</span>
+						<span class="col-xs-7 control-label">
+							<span data-bind="text:interfacecmdinterval"></span><span> 毫秒</span>
+						</span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">通讯超时:</span>
+						<span class="col-xs-7 control-label">
+							<span data-bind="text:interfacetimeout"></span><span> 毫秒</span>
+						</span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">备注信息:</span>
+						<span class="col-xs-7 control-label" data-bind="text:interfaceremark"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /ko -->
+	</div>
+</script>

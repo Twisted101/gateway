@@ -1,0 +1,166 @@
+<script type="text/html" id="template-systemInfo">
+	<div>
+		<div class="content-header">
+			<span>系统信息</span>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-lg-6">
+				<div class="undfan-ibox">
+					<div class="undfan-ibox-title">
+						<div class="undfan-ibox-icon">
+							<span class="icon-name">基本信息</span>
+						</div>
+						<div class="undfan-ibox-tools">
+							<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-bind="click: undfan.systemInfo.editInfo.bind($data)"></span>&nbsp;&nbsp;
+						</div>
+					</div>
+					<div class="undfan-ibox-content">
+						<div class="row">
+							<div class="infoPic col-xs-3">
+								<i class="iconfont"></i>
+							</div>
+							<div class="infoText col-xs-8 col-md-9">
+								<div class="row">
+									<span class="col-xs-4 control-label">网关名称:</span>
+									<span class="col-xs-7 control-label" data-bind="text:undfan.systemInfo.smartgate_name"></span>
+								</div>
+								<div class="row">
+									<span class="col-xs-4 control-label">网关编号:</span>
+									<span class="col-xs-7 control-label" data-bind="text:undfan.systemInfo.smartgate_sn"></span>
+								</div>
+								<div class="row">
+									<span class="col-xs-4 control-label">硬件版本:</span>
+									<span class="col-xs-7 control-label" data-bind="undfan.systemInfo.smartgate_hard"></span>
+								</div>
+								<div class="row">
+									<span class="col-xs-4 control-label">软件版本:</span>
+									<span class="col-xs-7 control-label" data-bind="text:undfan.systemInfo.smartgate_soft"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-lg-4">
+				<div class="undfan-ibox">
+					<div class="undfan-ibox-title">
+						<div class="undfan-ibox-icon">
+							<span class="icon-name">设备信息</span>
+						</div>
+					</div>
+					<div class="undfan-ibox-content">
+						<div id="deviceInfo" style="height:300px;"></div>
+						<div class="row supplement">
+							<div class="col-xs-4">设备总数<span>31</span>个</div>
+							<div class="col-xs-4">在线<span>21</span>个</div>
+							<div class="col-xs-4">离线<span>10</span>个</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-lg-4">
+				<div class="undfan-ibox">
+					<div class="undfan-ibox-title">
+						<div class="undfan-ibox-icon">
+							<span class="icon-name">内部存储</span>
+						</div>
+					</div>
+					<div class="undfan-ibox-content">
+						<div id="storage" style="height:300px;"></div>
+						<div class="row supplement">
+							<div class="col-xs-4">共计空间<span>1000</span>M</div>
+							<div class="col-xs-4">已用<span>100</span>M</div>
+							<div class="col-xs-4">剩余<span>900</span>M</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-lg-4">
+				<div class="undfan-ibox">
+					<div class="undfan-ibox-title">
+						<div class="undfan-ibox-icon">
+							<span class="icon-name">外部储存</span>
+						</div>
+					</div>
+					<div class="undfan-ibox-content">
+						<div id="sdStorage" style="height:300px;"></div>
+						<div class="row supplement">
+							<div class="col-xs-4">共计空间<span>1000</span>M</div>
+							<div class="col-xs-4">已用<span>500.5</span>M</div>
+							<div class="col-xs-4">剩余<span>499.5</span>M</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mem_cpu">
+				<div class="col-xs-12 col-lg-12">
+					<div class="undfan-ibox">
+						<div class="undfan-ibox-title">
+							<div class="undfan-ibox-icon">
+								<span class="icon-name">内存信息</span>
+							</div>
+						</div>
+						<div class="undfan-ibox-content">
+							<div id="mem_info" style="height:300px"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mem_cpu">
+				<div class="col-xs-12 col-lg-12">
+					<div class="undfan-ibox">
+						<div class="undfan-ibox-title">
+							<div class="undfan-ibox-icon">
+								<span class="icon-name">CPU信息</span>
+							</div>
+						</div>
+						<div class="undfan-ibox-content">
+							<div id="cpu_info" style="height:300px"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/html" id="template-editSystemInfo-modal">
+	<div class="modal fade bs-example-modal-sm" id="modifyNetSetting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>修改基本信息</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">IP地址:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:editName,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editName.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editName.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editName.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button class="btn btn-sm btn-success" data-dismiss="modal" data-bind="click:btnOk, css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>

@@ -1,0 +1,147 @@
+<!--修改模态框-->
+<script type="text/html" id="template-editSerialSetting-modal">
+	<div class="modal fade bs-example-modal-sm" id="modifyNetSetting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>修改串口设置</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">串口名称:</label>
+						<label type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="text:name"></label>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">波特率:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:baudrate">
+							<option value="1200">1200bps</option>
+							<option value="2400">2400bps</option>
+							<option value="4800">4800bps</option>
+							<option value="9600">9600bps</option>
+						</select>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">校验位:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:evenoddcheck">
+							<option value="0">无校验</option>
+							<option value="1">奇校验</option>
+							<option value="2">偶校验</option>
+						</select>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">数据位:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:databit">
+							<option value="5">5位</option>
+							<option value="6">6位</option>
+							<option value="7">7位</option>
+							<option value="8">8位</option>
+						</select>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">停止位:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:stopbit">
+							<option value="1">1位</option>
+							<option value="1.5">1.5位</option>
+							<option value="2">2位</option>
+						</select>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button class="btn btn-sm btn-success" data-dismiss="modal" data-bind="click:btnOk">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/修改模态框-->
+<script type="text/html" id="template-SerialSetting">
+	<div class="content-header">
+		<span>串口设置</span>
+	</div>
+	<div class="row">
+		<!-- ko foreach: undfan.serialSetting.serialDataList -->
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="undfan-ibox">
+				<div class="undfan-ibox-title">
+					<div class="undfan-ibox-icon">
+						<span class="icon-name" data-bind="text:name"></span>
+					</div>
+					<div class="undfan-ibox-tools">
+						<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-toggle="" data-target="#modifyNetSetting" data-bind="click: undfan.serialSetting.edit.bind($data)"></span>&nbsp;&nbsp;
+					</div>
+				</div>
+				<div class="undfan-ibox-content">
+					<div class="row">
+						<span class="col-xs-4 control-label">波特率:</span>
+						<span class="col-xs-7 control-label">
+							<!--ko if:baudrate()==1200-->
+							1200bps
+							<!--/ko-->
+							<!--ko if:baudrate()==2400-->
+							2400bps
+							<!--/ko-->
+							<!--ko if:baudrate()==4800-->
+							4800bps
+							<!--/ko-->
+							<!--ko if:baudrate()==9600-->
+							9600bps
+							<!--/ko-->	
+						</span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">校验位:</span>
+						<span class="col-xs-7 control-label">
+							<!--ko if:evenoddcheck()==0-->
+							无效验
+							<!--/ko-->
+							<!--ko if:evenoddcheck()==1-->
+							奇效验
+							<!--/ko-->
+							<!--ko if:evenoddcheck()==2-->
+							偶效验
+							<!--/ko-->							
+						</span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">数据位:</span>
+						<span class="col-xs-7 control-label">
+							<!--ko if:databit()==5-->
+							5位
+							<!--/ko-->
+							<!--ko if:databit()==6-->
+							6位
+							<!--/ko-->
+							<!--ko if:databit()==7-->
+							7位
+							<!--/ko-->
+							<!--ko if:databit()==8-->
+							8位
+							<!--/ko-->								
+						</span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">停止位:</span>
+						<span class="col-xs-7 control-label">
+							<!--ko if:stopbit()==1-->
+							1位
+							<!--/ko-->
+							<!--ko if:stopbit()==1.5-->
+							1.5位
+							<!--/ko-->
+							<!--ko if:stopbit()==2-->
+							2位
+							<!--/ko-->							
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /ko -->
+	</div>
+</script>

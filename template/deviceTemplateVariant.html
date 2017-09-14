@@ -1,0 +1,664 @@
+<script type="text/html" id="template-deviceTemplateVariant">
+	<div>
+		<div class="content-header">
+			<span data-bind="text:undfan.deviceTemplateVariant.title"></span>
+		</div>
+		<div id="toolbar" class="btn-group">
+			<button id="add_variant" type="button" class="btn btn-default" data-bind="click: undfan.deviceTemplateVariant.addVariant"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#286090"></span>&nbsp;添加变量</button>
+			<button id="add_all_variant" class='btn btn-default' data-bind="click: undfan.deviceTemplateVariant.addAllVariant,visible:undfan.deviceTemplateVariant.virtualDevice"><span class='glyphicon glyphicon-plus-sign' style='color:#283eb7'></span>&nbsp;添加所有变量 </button>
+			<button id="edit_variant" class='btn btn-default' data-bind="click: undfan.deviceTemplateVariant.editVariant"><span class='glyphicon glyphicon-pencil' style='color:#28b779'></span>&nbsp;编辑变量 </button>
+			<button id="delete_variant" class='btn btn-default' data-bind="click: undfan.deviceTemplateVariant.deleteVariant"><span class='glyphicon glyphicon-remove' style='color:#d9534f'></span>&nbsp;删除 </button>
+		</div>
+
+		<table id="devicetemplatetable" data-click-to-select="true" data-url="./data/variantList.json" data-pagination="true" data-show-toggle="true" data-show-columns="true" data-sortable="false" data-silent-sort="false" data-striped="true" data-click-to-select="false" data-cache="false" data-content-type="application/json" data-query-params="" data-page-number="1" data-page-size="20" data-page-list="[5,10,20,30,40,50,100]" data-resizable="true" data-response-handler="" data-unique-id="Code" data-maintain-selected="true" data-toolbar="#toolbar">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th data-field="Name">变量名称</th>
+					<th data-field="Code">变量标签</th>
+					<th data-field="Type">类型</th>
+					<th data-field="DisplayType">显示类型</th>
+					<th data-field="DataType">数据类型</th>
+					<th data-field="Precision">小数位数</th>
+					<th data-field="Unit">单位</th>
+					<th data-field="RWFlag">读写标识</th>
+					<th data-field="Period">采集周期(秒)</th>
+					<th data-field="IsStore">是否储存</th>
+					<th data-field="RangeFilter">量程筛选</th>
+					<th data-field="RangeMax">量程最大</th>
+					<th data-field="RangeMin">量程最小</th>
+					<th data-field="SlopeFilter">斜率筛选</th>
+					<th data-field="SlopeMax">斜率最大</th>
+					<th data-field="SlopeMin">斜率最小</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>
+<!--添加设备模板模态框-->
+<script type="text/html" id="template-addTemplateVariant-modal">
+	<div class="modal fade bs-example-modal-sm" id="addDeviceTemplateVariant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span data-bind="text:title"></span>
+					</div>
+				</div>
+				<!-- ko ifnot: havenovariant -->
+				<div class="modal-body">
+					<!-- ko if: isVirtualDevice -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">变量名称:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:name,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: name.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: name.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">变量编码:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:code,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: code.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: code.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">小数位数:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:precision,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: precision.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: precision.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">单位变量:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:unit,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: unit.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: unit.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">变量类型:</label>
+						<label type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7">虚拟变量</label>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">数据类型:</label>
+						<select class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options: undfan.deviceTemplateVariant.VariantDataType, optionsText:'name', optionsValue:'value', value: datatype">
+						</select>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">显示类型:</label>
+						<select class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options: undfan.deviceTemplateVariant.VariantDisplayType, optionsText:'name', optionsValue:'value', value: displaytype">
+						</select>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">读写标识:</label>
+						<select class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options: undfan.deviceTemplateVariant.VariantRWFlag, optionsText:'name', optionsValue:'value', value: rwflag">
+						</select>
+					</div>
+					<!--/ko-->
+					<!-- ko ifnot: allVariants-->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备变量:</label>
+						<select data-bind="options: undfan.deviceTemplateVariant.addVariant_DeviceVariants, optionsText:'Name', optionsValue:'Code', value: code" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+					<!-- /ko -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">采集周期:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:period,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: period.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: period.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">是否储存:</label>
+						<input id="addisstore" type="checkbox" data-bind="checked:isStore" class="col-xs-6"></input>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">量程筛选:</label>
+						<input id="addrangefilter" type="checkbox" data-bind="checked:rangefilter" class="col-xs-6"></input>
+						<div class="col-sm-2 col-xs-2" style="float:right">
+							<!-- ko if: rangeError -->
+							<a href="#" tabindex="-1" title="最小值、最大值不符合逻辑">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- ko if: rangefilter -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最小:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:rangemin,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: rangemin.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: rangemin.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最大:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:rangemax,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: rangemax.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: rangemax.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">斜率筛选:</label>
+						<input id="addslopefilter" type="checkbox" data-bind="checked:slopefilter" class="col-xs-6"></input>
+						<div class="col-sm-2 col-xs-2 control-tip" style="float:right">
+							<!-- ko if: slopeError -->
+							<a href="#" tabindex="-1" title="最小值、最大值不符合逻辑">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- ko if: slopefilter -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最小:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:slopemin,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: slopemin.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: slopemin.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最大:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:slopemax,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: slopemax.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: slopemax.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+				</div>
+				<!-- /ko -->
+
+				<!-- ko if: havenovariant -->
+				<div class="modal-body">
+					<span>当前设备模板的变量已经全部添加</span>
+				</div>
+				<!-- /ko -->
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button data-bind="click: btnOk.bind($data),css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/添加模态框-->
+<!--编辑设备模板模态框-->
+<script type="text/html" id="template-editTemplateVariant-modal">
+	<div class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<span class="white">&times;</span>
+						</button>
+						<span data-bind="text: title"></span>
+					</div>
+				</div>
+
+				<div class="modal-body">
+					<!-- 编辑一个变量 -->
+					<!-- ko if: isEditOne -->
+					<!-- ko if: isVirtualDevice -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">变量名称:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.name, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editOneItem.name.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.name.hasError -->
+							<a href="#" tabindex="-1">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">小数位数:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.variantPrecision, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editOneItem.variantPrecision.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.variantPrecision.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editOneItem.variantPrecision.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">变量单位:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.variantUint, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editOneItem.variantUint.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.variantUint.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editOneItem.variantUint.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">变量类型:</label>
+						<label class="control-label col-xs-6 margin-top-5 text-center" style="text-align: left">虚拟变量</label>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">数据类型:</label>
+						<select data-bind="options: undfan.deviceTemplateVariant.VariantDataType, optionsText:'name', optionsValue:'value', value: editOneItem.variantDataType" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">显示类型:</label>
+						<select data-bind="options: undfan.deviceTemplateVariant.VariantDisplayType, optionsText:'name', optionsValue:'value', value: editOneItem.variantDisplayType" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">读写标识:</label>
+						<select data-bind="options: undfan.deviceTemplateVariant.VariantRWFlag, optionsText:'name', optionsValue:'value', value: editOneItem.RWFlag" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
+					</div>
+
+					<!-- /ko -->
+
+					<!-- ko ifnot: isVirtualDevice -->
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">变量名称:</label>
+						<label class="control-label col-xs-6 margin-top-5 text-center" style="text-align: left" data-bind="text: editOneItem.name "></label>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">变量标签:</label>
+						<label class="control-label col-xs-6 margin-top-5 text-center" style="text-align: left" data-bind="text: editOneItem.code "></label>
+					</div>
+					<!-- /ko -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">采集周期:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.variantPeriod, valueUpdate: 'keyup'" />
+						<div class="col-xs-1 control-tip">
+							<!-- ko ifnot: editOneItem.variantPeriod.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.variantPeriod.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editOneItem.variantPeriod.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+						<span class="col-xs-1 control-label" style="padding-left: 0;color:green">秒</span>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">是否储存:</label>
+						<input id="editisstore" type="checkbox" data-bind="checked: editOneItem.isStore" class="col-xs-6"/>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">量程筛选:</label>
+						<input id="editrangefilter" class="col-xs-3" type="checkbox" data-bind="checked: editOneItem.rangeFilter" />
+						<div class="col-sm-2 col-xs-2" style="float:right">
+							<!-- ko if: rangeError -->
+							<a href="#" tabindex="-1" title="最小值、最大值不符合逻辑">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+
+					<!-- ko if: editOneItem.rangeFilter -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最小:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.rangeMin, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editOneItem.rangeMin.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.rangeMin.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editOneItem.rangeMin.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最大:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.rangeMax, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editOneItem.rangeMax.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.rangeMax.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editOneItem.rangeMax.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3 align-left">斜率筛选:</label>
+						<input id="editslopefilter" class="col-xs-6" type="checkbox" data-bind="checked: editOneItem.slopeFilter" />
+						<div class="col-sm-2 col-xs-2" style="float:right">
+							<!-- ko if: slopeError -->
+							<a href="#" tabindex="-1" title="最小值、最大值不符合逻辑">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- ko if: editOneItem.slopeFilter -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最小:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.slopeMin, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editOneItem.slopeMin.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.slopeMin.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editOneItem.slopeMin.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最大:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editOneItem.slopeMax, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: editOneItem.slopeMax.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: editOneItem.slopeMax.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: editOneItem.slopeMax.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+					<!-- /ko -->
+
+					<!--编辑多个变量 -->
+					<!-- ko ifnot: isEditOne -->
+					<div class="row">
+						<input class="col-xs-2" data-bind="checked: isEditMultiplePeriod" type="checkbox">
+						<label class="control-label col-xs-3 col-md-3 align-left">采集周期:</label>
+						<input type="text" class="col-xs-4" data-bind="value: multipleEditPeriod, valueUpdate: 'keyup'" />
+						<div class="col-xs-1">
+							<!-- ko ifnot: multipleEditPeriod.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: multipleEditPeriod.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditPeriod.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+						<span class="col-xs-1" style="color:green;padding-left:0">秒</span>
+					</div>
+					<div class="row">
+						<input class="col-xs-2" data-bind="checked: isEditMultipleIsStore" type="checkbox">
+						<label class="control-label col-xs-3 col-md-3 align-left">是否存储:</label>
+						<input id="multipleEditIsStore" type="checkbox" data-bind="checked: multipleEditIsStore" class="col-xs-3"/>
+					</div>
+					<div class="row">
+						<input class="col-xs-2" data-bind="checked: isEditMultipleRangeFilter" type="checkbox">
+						<label class="control-label col-xs-3 col-md-3 align-left">量程筛选:</label>
+						<input id="multipleEditRangeFilter" class="col-xs-3" type="checkbox" data-bind="checked: multipleEditRangeFilter" />
+						<div class=" col-xs-3 control-tip" style="float:right">
+							<!-- ko if: multipleEditRangeError -->
+							<a href="#" tabindex="-1" title="最小值、最大值不符合逻辑">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- ko if: multipleEditRangeFilter -->
+
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最小:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditRangeMin, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: multipleEditRangeMin.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: multipleEditRangeMin.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditRangeMin.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最大:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditRangeMax, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: multipleEditRangeMax.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: multipleEditRangeMax.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditRangeMax.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+					<div class="row">
+						<input class="col-xs-2" data-bind="checked: isEditMultipleSlopeFilter" type="checkbox">
+						<label class="control-label col-xs-3 col-md-3 align-left">斜率筛选:</label>
+						<input id="multipleEditSlopeFilter" class="col-xs-3" type="checkbox" data-bind="checked: multipleEditSlopeFilter" />
+						<div class=" col-xs-3 control-tip" style="float:right">
+							<!-- ko if: multipleEditSlopeError -->
+							<a href="#" tabindex="-1" title="最小值、最大值不符合逻辑">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- ko if: multipleEditSlopeFilter -->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最小:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditSlopeMin, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: multipleEditSlopeMin.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: multipleEditSlopeMin.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditSlopeMin.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">最大:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditSlopeMax, valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: multipleEditSlopeMax.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: multipleEditSlopeMax.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: multipleEditSlopeMax.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- /ko -->
+
+					<!-- /ko -->
+				</div>
+				<div class="modal-footer no-margin-top">
+					<span style="float:left" data-bind="text:remind"></span>
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">
+						取消
+					</button>
+					<button data-bind="click: btnOk.bind($data),css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						确定
+					</button>
+
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /#modal-add-device -->
+	<!-- 编辑设备模板变量的弹出框 -->
+</script>
+<!--/编辑设备模板模态框-->
+<!--删除设备模板模态框-->
+<script type="text/html" id="template-deleteTemplateVariant-modal">
+	<div class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<span class="white">&times;</span>
+						</button>
+						<span data-bind="text: title"></span>
+					</div>
+				</div>
+
+				<div class="modal-body" style="padding-left:50px;">
+					<div class="row">
+						<span>确定要删除</span>
+						<span style="color:red">选中的模板变量</span>
+						<span>吗？</span>
+					</div>
+				</div>
+
+				<div class="modal-footer no-margin-top">
+
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">
+						<i class="icon-remove"></i>
+						取消
+					</button>
+					<button data-bind="click: btnOk" class="btn btn-sm btn-success" data-dismiss="modal">
+						<i class="icon-ok"></i>
+						确定
+					</button>
+
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /#modal-add-device -->
+</script>
+<!--/删除设备模板模态框-->

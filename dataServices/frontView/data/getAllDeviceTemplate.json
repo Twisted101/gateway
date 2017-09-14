@@ -1,0 +1,31 @@
+[
+	{
+		"code": "",
+		"driverCode": "SmartTempContrl",
+		"id": 1,
+		"name": "智能温控器",
+		"remark": "",
+		"type": "NetProtocol"
+	}, {
+		"code": "",
+		"driverCode": "paymentMeter",
+		"id": 2,
+		"name": "预付费",
+		"remark": "",
+		"type": "NetProtocol"
+	}, {
+		"code": "SmartAC",
+		"driverCode": "",
+		"id": 1481195539,
+		"name": "Smart_AC",
+		"remark": "",
+		"type": "NetProtocol"
+	}, {
+		"code": "DTZY422",
+		"driverCode": "",
+		"id": 1589448720,
+		"name": "预付费三相",
+		"remark": "",
+		"type": "NetProtocol"
+	}
+]

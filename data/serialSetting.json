@@ -1,0 +1,45 @@
+[
+	{
+		"Name": "串口1",
+		"BaudRate": "1200",
+		"EvenOddCheck": "0",
+		"DataBit": "5",
+		"StopBit": "1",
+		"Id": "1"
+	}, {
+		"Name": "串口2",
+		"BaudRate": "2400",
+		"EvenOddCheck": "1",
+		"DataBit": "6",
+		"StopBit": "1",
+		"Id": "2"
+	}, {
+		"Name": "串口3",
+		"BaudRate": "4800",
+		"EvenOddCheck": "0",
+		"DataBit": "7",
+		"StopBit": "1",
+		"Id": "3"
+	}, {
+		"Name": "串口4",
+		"BaudRate": "9600",
+		"EvenOddCheck": "0",
+		"DataBit": "8",
+		"StopBit": "1",
+		"Id": "4"
+	}, {
+		"Name": "串口5",
+		"BaudRate": "4800",
+		"EvenOddCheck": "0",
+		"DataBit": "7",
+		"StopBit": "1",
+		"Id": "5"
+	}, {
+		"Name": "串口6",
+		"BaudRate": "2400",
+		"EvenOddCheck": "0",
+		"DataBit": "6",
+		"StopBit": "1",
+		"Id": "6"
+	}
+]

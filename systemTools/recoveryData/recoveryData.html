@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../../public/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../public/css/toastr.min.css" />
+	<link rel="stylesheet" href="../../css/index.css" />
+	<link rel="stylesheet" href="../../systemTools/publicCSS/publicCSS.css" />
+	<link rel="stylesheet" href="../../systemTools/recoveryData/css/recoveryData.css" />
+
+	<body>
+		<div class="modal fade" tabindex="-1" id="recoveryDataModal" data-backdrop="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click:closeModal">
+							<span class="white">&times;</span>
+						</button>
+							<span>系统升级</span>
+						</div>
+					</div>
+					<div class="modal-body">
+						<form id="fileUploadForm" method="POST" action="/api/systemupdate" enctype="multipart/form-data">
+							<div class="row">
+								<div class="input-group">
+									<input type="text" class="form-control" aria-describedby="packagename" placeholder="请选择升级包" readonly="" data-bind="value:uploadFile, click:uploadFile_inputClick">
+									<span class="input-group-btn">
+        								<button type="submit" class="btn btn-primary" data-bind="click: submitUpdate">升级</button>
+      								</span>
+								</div>
+							</div>
+							<input type="file" class="postedFile" id="postedFile" name="postedFile" data-bind="event:{change:postedFileChange}" style="display: none!important;">
+						</form>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../public/js/jquery-3.1.1.min.js"></script>
+	<script src="../../public/js/bootstrap.min.js"></script>
+	<script src="../../public/js/knockout-3.4.1.js"></script>
+	<script src="../../public/js/toastr.min.js"></script>
+
+	<script src="../../systemTools/recoveryData/js/recoveryData.js"></script>
+
+</html>

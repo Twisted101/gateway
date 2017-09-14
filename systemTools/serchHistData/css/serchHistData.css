@@ -1,0 +1,17 @@
+#serchHistDataModal .modal-body .choose-data,
+#serchHistDataModal .modal-body .choose-date {
+	padding: 0;
+	margin: 0;
+	padding-bottom: 10px;
+}
+
+#serchHistDataModal .modal-body .choose-date>div.col-xs-5,
+#serchHistDataModal .modal-body .choose-date>div.col-xs-2 {
+	padding: 0;
+	margin: 0;
+}
+
+#serchHistDataModal .modal-body .choose-data select {
+	display: inline-block;
+	width: auto;
+}

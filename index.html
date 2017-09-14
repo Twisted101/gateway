@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<!-- 让国产浏览器启用webkit内核渲染页面 -->
+		<meta name="renderer" content="webkit">
+		<title>网关模板</title>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="public/css/bootstrap.css" />
+		<link rel="stylesheet" href="public/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="public/css/bootstrap-switch.min.css" />
+		<link rel="stylesheet" href="public/css/bootstrap-datetimepicker.css" />
+		<link rel="stylesheet" href="public/css/toastr.min.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/sidebar-nav.css" />
+		<link rel="stylesheet" href="css/undfan-ibox.css" />
+		<link rel="stylesheet" href="css/bootstrap-table-update.css" />
+		<link rel="stylesheet" href="css/modal-box.css" />
+		<link rel="stylesheet" href="css/modules.css" />
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+	</head>
+
+	<body>
+		<!-- .top-header -->
+		<div class="top-header">
+			<button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+         <span class="hamb-top"></span>
+         <span class="hamb-middle"></span>
+         <span class="hamb-bottom"></span>
+       </button>
+			<span>智能数据网关</span>
+			<i class="iconfont top-nav-toggle"></i>
+			<div class='top-nav'>
+				<div class="top-nav-content">
+					<ul>
+						<li>
+							<a>修改密码</a>
+						</li>
+						<li>
+							<a data-bind="click:undfan.systemTools.goToiframe" data-iframe="sysUpdate">系统升级</a>
+						</li>
+						<li data-bind="click:undfan.systemTools.goToiframe" data-iframe="backupsData">
+							<a>备份数据</a>
+						</li>
+						<li data-bind="click:undfan.systemTools.goToiframe" data-iframe="recoveryData">
+							<a>恢复数据</a>
+						</li>
+						<!--<li data-bind="click:undfan.systemTools.goToiframe" data-iframe="restartSGServer">
+							<a>重启服务</a>
+						</li>-->
+						<li data-bind="click:undfan.systemTools.goToiframe" data-iframe="restartSG">
+							<a>重新启动</a>
+						</li>
+						<li>
+							<a>注销用户</a>
+						</li>
+					</ul>
+				</div>
+				<div class='top-nav-triangle-hidden'>
+					<div class="top-nav-triangle"></div>
+				</div>
+			</div>
+		</div>
+		<!-- /.top-header -->
+		<!-- #wrapper -->
+		<div id="wrapper" class="toggled">
+			<!-- .navbar -->
+			<nav class="navbar navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+				<ul class="nav sidebar-nav" id="sidebar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle has-dropdown-content"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>基础设置<span class='iconfont-dropdown'></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/netSetting" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>网口设置</a>
+							</li>
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/SerialSetting" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>串口设置</a>
+							</li>
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/serialInterface" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>采集接口</a>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown" undfan-href="#/deviceTemplate" data-bind="click: undfan.undfanNavigateView">
+						<a href="#" class="dropdown-toggle"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>设备模板</a>
+					</li>
+					<li class="dropdown" undfan-href="#/deviceManager" data-bind="click: undfan.undfanNavigateView">
+						<a href="#" class="dropdown-toggle"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>设备管理</a>
+					</li>
+					<li class="dropdown" undfan-href="#/dataServices" data-bind="click: undfan.undfanNavigateView">
+						<a href="#" class="dropdown-toggle"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>数据服务</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle has-dropdown-content"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>系统维护<span class='iconfont-dropdown'></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/systemInfo" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>系统信息</a>
+							</li>
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/histLogManager" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>历史日志</a>
+							</li>
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/realLogManager" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>实时日志</a>
+							</li>
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/interfaceRealData" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>实时报文</a>
+							</li>
+							<li class='dropdown-li'>
+								<a href="#" undfan-href="#/systemTools" data-bind="click: undfan.undfanNavigateView"><i class="iconfont listi"></i>系统工具</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<!-- /.navbar -->
+			<!-- #page-content-wrapper -->
+			<div id="page-content-wrapper">
+				<div class="content-body">
+
+					<div data-bind="template:{name: undfan.route.curTemplate, data: undfan.route.curRouteItem, afterRender: undfan.route.afterRender.bind(route.curRouteItem, $element)}"></div>
+
+				</div>
+			</div>
+			<!-- /#page-content-wrapper -->
+		</div>
+		<!-- /#wrapper -->
+			<iframe frameborder="0" id="iframeDom"></iframe>
+
+		
+		<script src="public/js/jquery-3.1.1.min.js"></script>
+		<script src="public/js/bootstrap.min.js"></script>
+		<script src="public/js/knockout-3.4.1.js"></script>
+		<script src="public/js/bootstrap-table.js"></script>
+		<script src="public/js/bootstrap-table-zh-CN.js"></script>
+		<script src="public/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="public/js/bootstrap-datetimepicker.zh-CN.js"></script>
+		<script src="public/js/modal.js"></script>
+		<script src="public/js/bootstrap-switch.min.js"></script>
+		<script src="public/js/echarts.min.js"></script>
+		<script src="public/js/toastr.min.js"></script>
+
+		<script src="undfan/js/event.js"></script>
+		<script src="undfan/js/router.js"></script>
+		<script src="undfan/js/SmartGate.js"></script>
+		<script src="undfan/js/validation.js"></script>
+
+		<script src="js/dataSource.js"></script>
+		<script type="text/javascript" src="js/netSetting.js"></script>
+		<script type="text/javascript" src="js/SerialSetting.js"></script>
+		<script type="text/javascript" src="js/serialInterface.js"></script>
+		<script type="text/javascript" src="js/deviceTemplate.js"></script>
+		<script type="text/javascript" src="js/deviceTemplateVariant.js"></script>
+		<script type="text/javascript" src="js/deviceManager.js"></script>
+		<script type="text/javascript" src="js/dataServices.js"></script>
+		<script type="text/javascript" src="js/deviceVariantData.js"></script>
+		<script type="text/javascript" src="js/systemInfo.js"></script>
+		<script type="text/javascript" src="js/histLogManager.js"></script>
+		<script type="text/javascript" src="js/realLogManager.js"></script>
+		<script type="text/javascript" src="js/interfaceRealData.js"></script>
+		<script type="text/javascript" src="js/extendManage.js"></script>
+		<script type="text/javascript" src="js/systemTools.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+</html>

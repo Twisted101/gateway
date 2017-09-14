@@ -1,0 +1,24 @@
+
+#restartSGmodal .modal-body .right {
+	border-left: 1px solid #ddd;
+}
+
+#restartSGmodal .modal-body div.col-xs-6 {
+	text-align: center;
+}
+
+#restartSGmodal .modal-body button {
+	width: 70%;
+	text-align: center;
+}
+
+#restartSGmodal .modal-body p {
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #555;
+	font-weight: 500;
+	line-height: 2;
+	margin-top: 10px;
+	text-indent: 2em;
+	text-align: left;
+}

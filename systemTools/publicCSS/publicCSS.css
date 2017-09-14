@@ -1,0 +1,10 @@
+html,
+body {
+	height: initial;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+	padding-left: 25px;
+	font-size: 14px;
+}

@@ -1,0 +1,21 @@
+<script type="text/html" id="template-realLogManager">
+	<div class="realLogManager">
+		<div class="content-header">
+			<span>实时日志</span>
+		</div>
+		<div id="toolbar" class="btn-group">
+			<button class="btn btn-default" data-bind="click:undfan.realLogManager.getData"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#286090"></span>&nbsp;开始接受</button>
+			<button class='btn btn-default' data-bind="click:undfan.realLogManager.stopGetData"><span class='glyphicon glyphicon-remove' style='color:#28b779'></span>&nbsp;停止接受 </button>
+			<button class='btn btn-default' data-bind="click:undfan.realLogManager.clearData"><span class='glyphicon glyphicon-trash' style='color:#d9534f'></span>&nbsp;清空数据 </button>
+		</div>
+		<table id="realLogManagerTable" data-pagination="true" data-toolbar="#toolbar" data-sortable="true" data-silent-sort="false" data-click-to-select="false" data-cache="false" data-content-type="application/json" data-query-params="" data-page-number="1" data-page-size="20" data-page-list="[5,10,20,30,40,50,100]" data-resizable="true" data-response-handler="" data-maintain-selected="true">
+			<thead>
+				<tr>
+					<th data-field="logType">日志类型</th>
+					<th data-field="logTime">日志时间</th>
+					<th data-field="logValue">日志内容</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>

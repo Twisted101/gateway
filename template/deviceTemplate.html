@@ -1,0 +1,178 @@
+<!--添加模态框-->
+<script type="text/html" id="template-addDeviceTemplate-modal">
+	<div class="modal fade bs-example-modal-sm" id="addDeviceTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>添加设备模板</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">模板名称:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:name,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: name.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: name.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: name.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备型号:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:devicename,options:undfan.deviceTemplate.deviceNameList,optionsText:'show',optionsValue:'deviceNameValue'">
+						</select>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remark,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: remark.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remark.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button data-bind="click: btnOk.bind($data),css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/添加模态框-->
+<!--修改模态框-->
+<script type="text/html" id="template-editDeviceTemplate-modal">
+	<div class="modal fade bs-example-modal-sm" id="editDeviceTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>修改设备模板</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">模板名称:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:name,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: name.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: name.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: name.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备型号:</label>
+						<label class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind='text:devicename'></label>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:remark,valueUpdate: 'keyup'" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: remark.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: remark.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button data-bind="click: btnOk.bind($data),css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }" class="btn btn-sm btn-success" data-dismiss="modal">
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/修改模态框-->
+<!--确认删除的模态框-->
+<script type="text/html" id="template-deleteDeviceTemplate-modal">
+	<div class="modal fade bs-example-modal-sm" id="deleteDeviceTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>删除串口确认</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<span>确认要删除</span>
+						<span data-bind="text:deleteName" style="color:red"></span>
+						<span>吗？</span>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button class="btn btn-sm btn-success" data-dismiss="modal" data-bind="click:btnOk">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/确认删除的模态框-->a
+<script type="text/html" id="template-deviceTemplate">
+	<div class="content-header">
+		<span>设备模板</span>
+		<button class="btn btn-primary" data-bind="click:undfan.deviceTemplate.add.bind($data)">添加设备模板</button>
+	</div>
+	<div class="row">
+		<!-- ko foreach: undfan.deviceTemplate.deviceTemplateList -->
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="undfan-ibox">
+				<div class="undfan-ibox-title">
+					<div class="undfan-ibox-icon">
+						<span class="icon-name" data-bind="text:name"></span>
+					</div>
+					<div class="undfan-ibox-tools">
+						<span class="glyphicon glyphicon-search undfan-ibox-detail" data-toggle="查询" undfan-href="#/deviceTemplateVariant" data-bind="attr: {'undfan-href': '#/deviceTemplateVariant/'+id()+'/Name/'+name()},click: undfan.undfanNavigateView"></span>&nbsp;&nbsp;
+						<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-toggle="编辑" data-target="#modifyNetSetting" data-bind="click: undfan.deviceTemplate.edit.bind($data)"></span>&nbsp;&nbsp;
+						<span class="glyphicon glyphicon-trash undfan-ibox-trash" title="删除" data-toggle="modal" data-target="#deleteModal" data-bind="click: undfan.deviceTemplate.remove.bind($data)"></span>
+					</div>
+				</div>
+				<div class="undfan-ibox-content">
+					<div class="row">
+						<span class="col-xs-4 control-label">设备型号:</span>
+						<span class="col-xs-7 control-label" data-bind="text:devicename"></span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">备注信息:</span>
+						<span class="col-xs-7 control-label" data-bind="text:remark"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /ko -->
+	</div>
+</script>

@@ -1,0 +1,39 @@
+[
+	{
+		"code": "CtrlValveStatus",
+		"name": "控制阀状态"
+	}, {
+		"code": "FlowRateStatus",
+		"name": "当前风速"
+	}, {
+		"code": "LockSwitch",
+		"name": "锁定状态"
+	}, {
+		"code": "ModeCmd",
+		"name": "模式设定"
+	}, {
+		"code": "ModeStatus",
+		"name": "工作模式"
+	}, {
+		"code": "RoomHum",
+		"name": "当前湿度值"
+	}, {
+		"code": "RoomTemp",
+		"name": "当前室温值"
+	}, {
+		"code": "RSSI",
+		"name": "信号强度"
+	}, {
+		"code": "StartStopCmd",
+		"name": "开关设定"
+	}, {
+		"code": "StartStopStatus",
+		"name": "开关状态"
+	}, {
+		"code": "TempSet",
+		"name": "设定温度值"
+	}, {
+		"code": "TotalEnergy",
+		"name": "累计用电量"
+	}
+]

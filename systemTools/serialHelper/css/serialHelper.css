@@ -1,0 +1,109 @@
+#serialHelperModal .modal-header>div>span {
+	font-size: 18px;
+}
+
+#serialHelperModal .modal-body {
+	padding-left: 20px;
+}
+
+#serialHelperModal .modal-body>div.row {
+	padding: 0;
+	margin: 0;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-8 {
+	padding: 0;
+	margin: 0;
+	height: 400px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-8>div:nth-of-type(1) {
+	height: 300px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-8>div:nth-of-type(1)>div {
+	position: relative;
+	width: 100%;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-8>div:nth-of-type(2) {
+	height: 100px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-8>div:nth-of-type(2)>div {
+	position: relative;
+	width: 100%;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4 {
+	padding: 0;
+	margin: 0;
+	padding-left: 10px;
+	height: 400px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-left: 1px solid #ccc;
+	padding-left: 8px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div .row {
+	margin-left: 2px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4 #serialHelpSelect {
+	border-radius: 5px;
+	height: 32px;
+	font-size: 15px;
+	width: 100%;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div>div.row>div:nth-of-type(1) {
+	font-size: 14px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div>div.row>div:nth-of-type(2) {
+	margin: 0;
+	padding: 0;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div>div.row>div:nth-of-type(2)>input {
+	width: 18px;
+	height: 18px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div>button:nth-of-type(1) {
+	position: absolute;
+	bottom: 110px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div>button:nth-of-type(2) {
+	position: absolute;
+	bottom: 40px;
+}
+
+#serialHelperModal .modal-body>div.row>div.col-xs-4>div>button:nth-of-type(3) {
+	position: absolute;
+	bottom: 0;
+}
+
+#serialHelpRecvTextarea {
+	width: 100%;
+	height: 290px;
+	font-size: 16px;
+	border-radius: 10px;
+	outline: none;
+	border: 1px solid #0990D2;
+}
+
+#serialHelpSendTextarea {
+	width: 100%;
+	height: 100px;
+	font-size: 16px;
+	border-radius: 10px;
+	outline: none;
+	border: 1px solid #0990D2;
+}

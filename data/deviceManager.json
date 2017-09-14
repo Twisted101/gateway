@@ -1,0 +1,29 @@
+[
+	{
+		"Id": "1",
+		"InterfaceId": "11",
+		"InterfaceName": "串口1",
+		"MeterNumber": "258889",
+		"Name": "设备名称一",
+		"Period": "60",
+		"Timeout": "180",
+		"TemplateId": "11",
+		"TemplateName": "hentong",
+		"InstallAddress": "",
+		"Remark": "备注一",
+		"bOnline": true
+	}, {
+		"Id": "2",
+		"InterfaceId": "22",
+		"InterfaceName": "串口2",
+		"MeterNumber": "258901",
+		"Name": "设备名称二",
+		"Period": "60",
+		"Timeout": "180",
+		"TemplateId": "22",
+		"TemplateName": "hentong",
+		"InstallAddress": "",
+		"Remark": "备注二",
+		"bOnline": false
+	}
+]

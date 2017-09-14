@@ -1,0 +1,58 @@
+<script type="text/html" id="template-histLogManager">
+	<div>
+		<div class="content-header">
+			<span>历史日志</span>
+		</div>
+		<div class="row hisLogManager">
+			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon" id="idStartDate">起始时间</span>
+					<input type="text" id="history-log-start-date" readonly data-bind="value: undfan.histLogManager.startDate" class="form-control" aria-describedby="idStartDate">
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon" id="idStartDate">结束时间</span>
+					<input type="text" id="history-log-end-date" readonly data-bind="value: undfan.histLogManager.endDate" class="form-control" aria-describedby="idStartDate">
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="idLogType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    					<span data-bind="text: undfan.histLogManager.logType"></span>&nbsp;&nbsp;<span class="caret"></span>
+  					</button>
+					<ul class="dropdown-menu" aria-labelledby="idLogType">
+						<li>
+							<a href="#" data-bind="click: undfan.histLogManager.logTypeSelect.bind($data,31)">全部</a>
+						</li>
+						<li>
+							<a href="#" data-bind="click: undfan.histLogManager.logTypeSelect.bind($data,16)">错误</a>
+						</li>
+						<li>
+							<a href="#" data-bind="click: undfan.histLogManager.logTypeSelect.bind($data,8)">严重</a>
+						</li>
+						<li>
+							<a href="#" data-bind="click: undfan.histLogManager.logTypeSelect.bind($data,4)">警告</a>
+						</li>
+						<li>
+							<a href="#" data-bind="click: undfan.histLogManager.logTypeSelect.bind($data,2)">提示</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="btn-group" id="toolbar" role="group" class="col-lg-3 col-md-3 col-sm-4 col-xs-6 col-md-offset-3">
+				<button type="button" class="btn btn-default" data-bind="click: undfan.histLogManager.serchLog"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color:#286090"></span>&nbsp;查询</button>
+				<button type="button" class="btn btn-default" data-bind="click: undfan.histLogManager.exportLog"><span class="glyphicon glyphicon-download-alt" aria-hidden="true" style="color:#28b779"></span>&nbsp;导出</button>
+			</div>
+		</div>
+		<table id="hisLogManagerTable"  data-pagination="true" data-sortable="true" data-silent-sort="false" data-click-to-select="false" data-cache="false" data-content-type="application/json" data-query-params="" data-page-number="1" data-page-size="20" data-page-list="[5,10,20,30,40,50,100]" data-resizable="true" data-response-handler="" data-maintain-selected="true">
+			<thead>
+				<tr>
+					<th data-field="logType">日志类型</th>
+					<th data-field="logTime" data-sortable="true">日志时间</th>
+					<th data-field="logValue">日志内容</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>

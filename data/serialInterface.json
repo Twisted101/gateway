@@ -1,0 +1,37 @@
+[
+	{
+		"InterfaceType": "localSerial",
+		"InterfaceId": 1,
+		"InterfaceName": "本地串口1",
+		"InterfaceDeviceId": "串口1",
+		"InterfaceCmdInterval": "50",
+		"InterfaceTimeout": "1000",
+		"InterfaceRemark": "备注1"
+	}, {
+		"InterfaceType": "udpToserial",	
+		"InterfaceId": 2,
+		"InterfaceName": "本地串口2",
+		"InterfaceDeviceId": "串口2",
+		"InterfaceCmdInterval": "50",
+		"InterfaceTimeout": "1000",
+		"InterfaceRemark": "备注2"
+	},  {
+		"InterfaceType": "tcpServerToSerial",	
+		"InterfaceId": 3,
+		"InterfaceName": "本地串口3",
+		"InterfaceDeviceId": "串口3",
+		"InterfaceCmdInterval": "50",
+		"InterfaceTimeout": "1000",
+		"InterfaceRemark": "备注3"
+	},{
+		"InterfaceType": "tcpClientToSerial",	
+		"InterfaceId": 4,
+		"InterfaceName": "网络串口4",
+		"InterfaceCmdInterval": "100",
+		"InterfaceTimeout": "500",
+		"LocalPort": "0",
+		"RemoteIP": "127.0.0.1",
+		"RemotePort": "0",
+		"InterfaceRemark": "网络串口备注3"
+	}
+]

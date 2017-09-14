@@ -1,0 +1,17 @@
+.bootstrap-table {
+	position: relative;
+}
+
+#toolbar {
+	position: relative;
+	width: auto
+}
+
+.fixed-table-pagination{
+	height: 0;
+}
+.fixed-table-body{
+	overflow: auto;
+}
+
+

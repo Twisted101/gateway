@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<!-- 让国产浏览器启用webkit内核渲染页面 -->
+		<meta name="renderer" content="webkit">
+		<title>frontView</title>
+		<link rel="stylesheet" href="../../public/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../public/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../public/css/bootstrap-switch.min.css" />
+		<link rel="stylesheet" href="../../public/css/bootstrap-datetimepicker.css" />
+		<link rel="stylesheet" href="../../public/css/toastr.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/sidebar-nav.css" />
+		<link rel="stylesheet" href="../../css/undfan-ibox.css" />
+		<link rel="stylesheet" href="../../css/bootstrap-table-update.css" />
+		<link rel="stylesheet" href="../../css/modal-box.css" />
+		<link rel="stylesheet" href="../../css/modules.css" />
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+	</head>
+
+	<body>
+		<!-- 传输模板-添加 -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="addTemplate">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">添加传输模板</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row" style="line-height: 30px;">
+							<label class="control-label col-xs-12 col-md-3 align-left">模板名称:</label>
+							<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:FV.template.addTemplateContent.devTemplate" />
+							<div class="col-sm-2 col-xs-2 control-tip">
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /传输模板-添加  -->
+		<!-- 传输模板-编辑 -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="editTemplate">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">编辑传输模板</h4>
+					</div>
+					<div class="modal-body">
+						<p>添加变量</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /传输模板-编辑  -->
+		<!-- 传输模板-删除 -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="deleteTemplate">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">编辑传输模板</h4>
+					</div>
+					<div class="modal-body">
+						<p>删除变量</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /传输模板-删除  -->
+		<!-- 传输模板-表格-添加变量 -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="addTemplateTable">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<p>添加变量</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /传输模板-表格-添加变量 -->
+		<!-- .top-header -->
+		<div class="top-header">
+			<button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+         <span class="hamb-top"></span>
+         <span class="hamb-middle"></span>
+         <span class="hamb-bottom"></span>
+       </button>
+			<span>frontView</span>
+			<i class="iconfont top-nav-toggle"></i>
+		</div>
+		<!-- /.top-header -->
+		<!-- #wrapper -->
+		<div id="wrapper" class="toggled">
+			<!-- .navbar -->
+			<nav class="navbar navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+				<ul class="nav sidebar-nav" id="sidebar-nav">
+					<li class="dropdown" data-bind="click: FV.template.openTemplate">
+						<a href="#" class="dropdown-toggle"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>传输模板</a>
+					</li>
+					<li class="dropdown" data-bind="click:FV.template.openReport">
+						<a href="#" class="dropdown-toggle"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>上报服务</a>
+					</li>
+				</ul>
+			</nav>
+			<!-- /.navbar -->
+			<!-- #page-content-wrapper -->
+			<div id="page-content-wrapper">
+				<div class="content-body">
+
+					<!-- ko if: FV.template.showTemplate-->
+					<div id="template">
+						<div class="content-header">
+							<span>传输模板</span>
+							<button class="btn btn-primary" data-bind="click:addTemplate">添加传输模板</button>
+						</div>
+						<div class="row">
+							<!-- ko foreach: FV.template.templateListKO -->
+							<div class="col-xs-12 col-sm-6 col-lg-4">
+								<div class="undfan-ibox">
+									<div class="undfan-ibox-title">
+										<div class="undfan-ibox-icon">
+											<span class="icon-name" data-bind="text:devTemplate"></span>
+										</div>
+										<div class="undfan-ibox-tools">
+											<span class="glyphicon glyphicon-search undfan-ibox-detail" data-toggle="查询" data-bind="click:FV.template.openTemplateTable.bind($data)"></span>&nbsp;&nbsp;
+											<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-toggle="编辑" data-bind="click:FV.template.editTemplate.bind($data)"></span>&nbsp;&nbsp;
+											<span class="glyphicon glyphicon-trash undfan-ibox-trash" title="删除" data-toggle="modal" data-target="#deleteModal" data-bind="click:FV.template.deleteTemplate.bind($data)"></span>
+										</div>
+									</div>
+									<div class="undfan-ibox-content">
+										<div class="row">
+											<span class="col-xs-4 control-label">关联模板:</span>
+											<span class="col-xs-7 control-label" data-bind="text:relevanceTemplate"></span>
+										</div>
+										<div class="row">
+											<span class="col-xs-4 control-label">备注信息:</span>
+											<span class="col-xs-7 control-label" data-bind="text:remark"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /ko -->
+						</div>
+					</div>
+					<!--/ko-->
+
+					<!-- ko if: FV.template.showTemplateTable-->
+					<div class="content-header">
+						<span data-bind="text:templateTableTitle"></span>
+					</div>
+					<div id="">
+						<div id="toolbar" class="btn-group">
+							<button id="add_variant" type="button" class="btn btn-default" data-bind=""><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#286090"></span>&nbsp;添加变量</button>
+							<button id="add_all_variant" class='btn btn-default' data-bind=""><span class='glyphicon glyphicon-plus-sign' style='color:#283eb7'></span>&nbsp;添加所有变量 </button>
+							<button id="edit_variant" class='btn btn-default' data-bind=""><span class='glyphicon glyphicon-pencil' style='color:#28b779'></span>&nbsp;编辑变量 </button>
+							<button id="delete_variant" class='btn btn-default' data-bind=""><span class='glyphicon glyphicon-remove' style='color:#d9534f'></span>&nbsp;删除 </button>
+						</div>
+
+						<table id="templateTable" data-click-to-select="true" data-pagination="true" data-show-toggle="true" data-show-columns="true" data-sortable="false" data-silent-sort="false" data-striped="true" data-click-to-select="false" data-cache="false" data-content-type="application/json" data-query-params="" data-page-number="1" data-page-size="20" data-page-list="[5,10,20,30,40,50,100]" data-resizable="true" data-response-handler="" data-unique-id="Code" data-maintain-selected="true" data-toolbar="#toolbar">
+							<thead>
+								<tr>
+									<th data-field="state" data-checkbox="true"></th>
+									<th data-field="name">设备变量</th>
+									<th data-field="deviceCode">变量标签</th>
+									<th data-field="histReport">历史数据上报</th>
+									<th data-field="stepChangeThreshold">阶跃阈值</th>
+									<th data-field="slopeChangeThreshold">斜率阈值</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<!--/ko-->
+
+					<!-- ko if: FV.template.showReport-->
+					<div id="showReport">
+						<div data-bind="template:'template-report',data:data-report"></div>
+					</div>
+					<!--/ko-->
+
+					<!-- ko if: FV.template.showReportTable-->
+					<div id="">
+						上报服务表格页面
+					</div>
+					<!--/ko-->
+
+				</div>
+			</div>
+			<!-- /#page-content-wrapper -->
+		</div>
+		<!-- /#wrapper -->
+		
+		
+		<script src="../../public/js/jquery-3.1.1.min.js"></script>
+		<script src="../../public/js/bootstrap.min.js"></script>
+		<script src="../../public/js/knockout-3.4.1.js"></script>
+		<script src="../../public/js/bootstrap-table.js"></script>
+		<script src="../../public/js/bootstrap-table-zh-CN.js"></script>
+		<script src="../../public/js/modal.js"></script>
+		<script src="../../public/js/toastr.min.js"></script>
+
+		<script src="../../undfan/js/validation.js"></script>
+		
+		
+		<script src="js/template.js"></script>
+		<script src="js/report.js"></script>
+		<script src="js/index.js"></script>
+
+	</body>
+
+</html>

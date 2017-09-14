@@ -1,0 +1,103 @@
+<script type="text/html" id="template-interfaceRealData">
+	<div>
+		<div class="content-header">
+			<span>实时报文</span>
+		</div>
+		<div id="toolbar" class="btn-group">
+			<ul class="dropdown-menu">
+				<!-- ko foreach: undfan.interfaceRealData.interfaceList -->
+				<li>
+					<a href="#" data-bind="click: undfan.interfaceRealData.toggleItemSelected.bind($data)">
+						<!-- ko if: isSelected-->
+						<i class="if if-check-square-o iconfont"></i>
+						<!-- /ko -->
+						<!-- ko ifnot: isSelected-->
+						<i class="if if-square-o iconfont"></i>
+						<!-- /ko -->
+						<span data-bind="text:interfaceName"></span>
+					</a>
+				</li>
+				<!-- /ko -->
+			</ul>
+			<button class="btn btn-default dropdown-toggle choose-port" data-bind="click:undfan.interfaceRealData.getData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="color:#286090"></span>
+				&nbsp;选择要调试的接口&nbsp;&nbsp;<span class="caret"></span>
+			</button>
+			<!-- ko if: 1 == undfan.interfaceRealData.btnType() -->
+			<button class='btn btn-default' data-bind="click:undfan.interfaceRealData.startDebugger"><span class='glyphicon glyphicon-wrench' style='color:#28b779'></span>&nbsp;开始调试 </button>
+			<!-- /ko -->
+			<!-- ko ifnot: 1 == undfan.interfaceRealData.btnType() -->
+			<button class='btn btn-default' data-bind="click:undfan.interfaceRealData.stopDebugger"><span class='glyphicon glyphicon-wrench' style='color:#28b779'></span>&nbsp;停止调试 </button>
+			<!-- /ko -->
+			<!--<button class='btn btn-default' data-bind="click:undfan.interfaceRealData.serialHelp"><span class='glyphicon glyphicon-user' style='color:#d9534f'></span>&nbsp;串口助手 </button>-->
+			<button class='btn btn-default' data-bind="click:undfan.interfaceRealData.clearData"><span class='glyphicon glyphicon-trash' style='color:#d9534f'></span>&nbsp;清除报文 </button>
+		</div>
+		<table id="interfaceRealDataTable" data-pagination="true" data-toolbar="#toolbar" data-sortable="true" data-silent-sort="false" data-click-to-select="false" data-cache="false" data-content-type="application/json" data-query-params="" data-page-number="1" data-page-size="20" data-page-list="[5,10,20,30,40,50,100]" data-resizable="true" data-response-handler="" data-maintain-selected="true">
+			<thead>
+				<tr>
+					<th data-field="dataType">报文类型</th>
+					<th data-field="interfaceName">接口</th>
+					<th data-field="dataTime">报文时间</th>
+					<th data-field="data">报文内容</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>
+
+<script type="text/html" id="template-dialnog-interfaceRealData-serialhelper-modal">
+	<!-- 串口助手弹出框 -->
+	<div class="modal fade" tabindex="-1" id="serialHelp">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<span class="white">&times;</span>
+						</button>
+						<span data-bind="text: title"></span>
+					</div>
+				</div>
+
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-8">
+							<div>
+								<div>
+									<textarea id="serialHelpRecvTextarea" placeholder="接收区" data-bind="value:serialHelpRecvTextarea"></textarea>
+								</div>
+							</div>
+							<div>
+								<div>
+									<textarea id="serialHelpSendTextarea" placeholder="发送区" data-bind="value:serialHelpSendTextarea"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div>
+								<div class="row">
+									<div class="col-xs-8">
+										<span>显示接收时间</span>
+									</div>
+									<div class="col-xs-2" >
+										<input type="checkbox"data-bind="checked: showRecvTime" />
+									</div>
+								</div>
+								<div>
+									<select id="serialHelpSelect" class="form-contro" data-bind="options: undfan.interfaceRealData.interfaceList, optionsText:'interfaceName', optionsValue:'interfaceId', value: interfaceId"></select>
+								</div>
+								<button class="btn  btn-default btn-block" data-bind="click:clearRecv">清空接收区</button>
+								<button class="btn btn-default btn-block" data-bind="click:clearSend">清空发送区</button>
+								<button  class="btn  btn-default btn-block" data-bind="click:sendData">发送</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /#modal-add-device -->
+	<!-- 串口助手弹出框 -->
+</script>

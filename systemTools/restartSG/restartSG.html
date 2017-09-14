@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../../public/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../public/css/toastr.min.css" />
+	<link rel="stylesheet" href="../../css/index.css" />
+	<link rel="stylesheet" href="../../systemTools/publicCSS/publicCSS.css" />
+	<link rel="stylesheet" href="../../systemTools/restartSG/css/restartSG.css" />
+	<body>
+		<div class="modal fade" tabindex="-1" id="restartSGmodal" data-backdrop="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click:closeModal">
+							<span class="white">&times;</span>
+						</button>
+							<span>重新启动</span>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-6 left">
+								<button type="button" class="btn btn-primary" >重启网关</button>
+								<p>重启网关文字说明重启网，关文字说明重启网关文字说，明重启网关文字说明重启网关文字说明重启网关文字说明。</p>
+							</div>
+							<div class="col-xs-6 right">
+								<button type="button" class="btn btn-primary">重启网关服务</button>
+								<p>重启网关服务文字说明重启网关服务文字说明重启网关，服务文字说明重启网关服务文字说明重启网关服务文字说明重启网关服务文字说明。</p>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click:closeModal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../public/js/jquery-3.1.1.min.js"></script>
+	<script src="../../public/js/bootstrap.min.js"></script>
+	<script src="../../public/js/knockout-3.4.1.js"></script>
+	<script src="../../public/js/toastr.min.js"></script>
+
+	<script src="../../systemTools/restartSG/js/restartSG.js"></script>
+
+</html>

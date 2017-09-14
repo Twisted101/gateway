@@ -1,0 +1,17 @@
+.modal .modal-body div.row{
+	line-height: 30px;
+}
+
+.modal-header {
+	padding-left: 25px;
+	font-size: 14px;
+}
+
+.modal .modal-body div.row>input,
+.modal .modal-body div.row>select{
+	height: 30px;
+}
+
+.modal .modal-body div.row i.glyphicon-warning-sign{
+	color: red;
+}

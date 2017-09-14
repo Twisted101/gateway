@@ -1,0 +1,144 @@
+<!--修改模态框-->
+<script type="text/html" id="template-editNetSetting-modal">
+	<div class="modal fade bs-example-modal-sm" id="modifyNetSetting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+            </button>
+						<span>修改网口设置</span>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">获取方式:</label>
+						<select type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:method,event:{change:methodChange}">
+							<option value="1">动态获取</option>
+							<option value="0">静态获取</option>
+						</select>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">MAC地址:</label>
+						<div type="text" style="height: 30px;display:inline;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="text:mac">
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">IP地址:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:ip,enable:ipDisabled" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: ip.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: ip.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: ip.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">子网掩码:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:netmask,enable:ipDisabled" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko ifnot: netmask.hasError -->
+							<a href="#" tabindex="-1" title="该项不能为空!">
+								<span>*</span>
+							</a>
+							<!-- /ko -->
+							<!-- ko if: netmask.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: netmask.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">默认网关:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:gateway,enable:ipDisabled" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: gateway.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: gateway.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">DNS:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:dns,enable:ipDisabled" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+							<!-- ko if: dns.hasError -->
+							<a href="#" tabindex="-1" data-bind="attr: {title: dns.vMsg}">
+								<i class="glyphicon glyphicon-warning-sign" style="color: red;"></i>
+							</a>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button class="btn btn-sm btn-success" data-dismiss="modal" data-bind="click:btnOk, css:{disabled: !isValide()}, attr: { title: isValide()?'保存修改':'输入信息有误,无法保存。' }">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<!--/修改模态框-->
+<script type="text/html" id="template-netSetting">
+	<div class="content-header">
+		<span>网口设置</span>
+	</div>
+	<div class="row">
+		<!-- ko foreach: undfan.netSetting.netDataList -->
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="undfan-ibox">
+				<div class="undfan-ibox-title">
+					<div class="undfan-ibox-icon">
+						<span class="icon-name" data-bind="text:name"></span>
+					</div>
+					<div class="undfan-ibox-tools">
+						<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-toggle="" data-target="#modifyNetSetting" data-bind="click: undfan.netSetting.edit.bind($data)"></span>&nbsp;&nbsp;
+					</div>
+				</div>
+				<div class="undfan-ibox-content">
+					<div class="row">
+						<span class="col-xs-4 control-label">获取方式:</span>
+						<span class="col-xs-7 control-label">
+							<!--ko if:method()==0-->
+							静态获取
+							<!--/ko-->
+							<!--ko if:method()==1-->
+							动态获取
+							<!--/ko-->
+						</span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">MAC地址:</span>
+						<span class="col-xs-7 control-label" data-bind="text:mac"></span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">IP地址:</span>
+						<span class="col-xs-7 control-label" data-bind="text:ip"></span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">子网掩码:</span>
+						<span class="col-xs-7 control-label" data-bind="text:netmask"></span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">默认网关:</span>
+						<span class="col-xs-7 control-label" data-bind="text:gateway"></span>
+					</div>
+					<div class="row">
+						<span class="col-xs-4 control-label">DNS:</span>
+						<span class="col-xs-7 control-label" data-bind="text:dns"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /ko -->
+	</div>
+</script>

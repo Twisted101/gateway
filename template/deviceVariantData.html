@@ -1,0 +1,39 @@
+<script type="text/html" id="template-deviceVariantData">
+	<div>
+		ID是
+		<span data-bind="text:undfan.deviceVariantData.dVDataId"></span>
+		TemplateId是
+		<span data-bind="text:undfan.deviceVariantData.dVDataTemplateId"></span>
+		<table id="devicemanagertable" 
+			data-click-to-select="true" 
+			data-url="./data/deviceVariantData.json" 
+			data-pagination="true" 
+			data-show-toggle="false" 
+			data-show-columns="true" 
+			data-show-refresh="true"
+			data-sortable="true" 
+			data-silent-sort="false" 
+			data-striped="true" 
+			data-click-to-select="false" 
+			data-cache="false" 
+			data-content-type="application/json"
+			data-page-number="1" 
+			data-page-size="20" 
+			data-page-list="[5,10,20,30,40,50,100]" 
+			data-resizable="true" 
+			data-unique-id="Id" 
+			data-maintain-selected="true">
+			<thead>
+				<tr>
+					<th data-field="Name">设备名称</th>
+					<th data-field="Code">变量编码</th>
+					<th data-field="DataType">数据类型</th>
+					<th data-field="DisplayType">显示类型</th>
+					<th data-field="Value">变量值</th>
+					<th data-field="Unit">变量单位</th>
+					<th data-field="ValueTime">采集时间</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>

@@ -1,0 +1,35 @@
+[
+	{
+		"Name": "报警状态",
+		"Code": "Alert",
+		"DataType": "int",
+		"DisplayType": "Default",
+		"Value": "1",
+		"Unit": "无",
+		"ValueTime": "2017-8-18 15:12:36"
+	}, {
+		"Name": "购电次数",
+		"Code": "BuyTime",
+		"DataType": "int",
+		"DisplayType": "Default",
+		"Value": "12",
+		"Unit": "无",
+		"ValueTime": "2017-8-18 17:20:15"
+	}, {
+		"Name": "控制状态",
+		"Code": "Ctrl",
+		"DataType": "int",
+		"DisplayType": "Default",
+		"Value": "11",
+		"Unit": "无",
+		"ValueTime": "2017-8-18 13:12:36"
+	}, {
+		"Name": "表具示数",
+		"Code": "Current",
+		"DataType": "int",
+		"DisplayType": "Default",
+		"Value": "1",
+		"Unit": "无",
+		"ValueTime": "2017-8-18 16:12:36"
+	}
+]

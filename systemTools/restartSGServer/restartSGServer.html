@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../../public/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../public/css/bootstrap-table.min.css" />
+	<link rel="stylesheet" href="../../css/index.css" />
+	<link rel="stylesheet" href="../../css/bootstrap-table-update.css" />
+	<link rel="stylesheet" href="../../systemTools/publicCSS/publicCSS.css" />
+	<body>
+		<div class="modal fade" tabindex="-1" id="restartSGmodal" data-backdrop="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click:closeModal">
+							<span class="white">&times;</span>
+						</button>
+						<span>重启网关服务</span>
+						</div>
+					</div>
+					<div class="modal-body">
+						<h5>确定重启网关服务吗？</h5>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click:closeModal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../public/js/jquery-3.1.1.min.js"></script>
+	<script src="../../public/js/bootstrap.min.js"></script>
+	<script src="../../public/js/knockout-3.4.1.js"></script>
+
+	<script src="../../systemTools/restartSGServer/js/restartSGServer.js"></script>
+</html>

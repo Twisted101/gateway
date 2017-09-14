@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../../public/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../public/css/bootstrap-table.min.css" />
+	<link rel="stylesheet" href="../../public/css/bootstrap-switch.min.css" />
+	<link rel="stylesheet" href="../../public/css/bootstrap-datetimepicker.css" />
+	<link rel="stylesheet" href="../../public/css/toastr.min.css" />
+	<link rel="stylesheet" href="../../css/index.css" />
+	<link rel="stylesheet" href="../../css/bootstrap-table-update.css" />
+	<link rel="stylesheet" href="../../systemTools/publicCSS/publicCSS.css" />
+	<link rel="stylesheet" href="../../systemTools/serchHistData/css/serchHistData.css" />
+
+	<body>
+		<div class="modal fade" tabindex="-1" id="serchHistDataModal" data-backdrop="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click:closeModal">
+							<span class="white">&times;</span>
+						</button>
+							<span>查看历史数据</span>
+						</div>
+					</div>
+					<div class="modal-body">
+						<!--选择数据-->
+						<div class="row choose-data">
+							<div class="col-xs-4">
+								<span>接口</span>
+								<select data-bind="options:interfaceList, optionsText:'interfaceName', optionsValue:'interfaceId',value: InterfaceId " class="form-control"></select>
+							</div>
+							<div class="col-xs-4">
+								<span>设备</span>
+								<select data-bind="options: MeterList, optionsText:'Name', optionsValue:'MeterId',value: MeterId" class="form-control"></select>
+							</div>
+							<div class="col-xs-4">
+								<span>变量</span>
+								<select data-bind="options: VariantList, optionsText:'name', optionsValue:'id',value: varId" class="form-control"></select>
+							</div>
+						</div>
+						<!--选择时间-->
+						<div class="row choose-date">
+							<div class="col-xs-5">
+								<div class="input-group">
+									<span class="input-group-addon" id="idStartDateHistData">起始时间</span>
+									<input type="text" id="history-data-start-date" readonly data-bind="value: startDate" class="form-control" aria-describedby="idStartDateHistData">
+								</div>
+							</div>
+
+							<div class="col-xs-5">
+								<div class="input-group">
+									<span class="input-group-addon" id="idEndDateHistData">结束时间</span>
+									<input type="text" id="history-data-end-date" readonly data-bind="value: endDate" class="form-control" aria-describedby="idEndDateHistData">
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn btn-primary btn-block" data-bind="click: serchLog">查询</button>
+							</div>
+						</div>
+						<table id="serchHistDataTable" 
+							data-url="./data/deviceManager.json" 
+							data-pagination="true" 
+							data-sortable="true" 
+							data-silent-sort="false" 
+							data-striped="true" 
+							data-click-to-select="false" 
+							data-cache="false" 
+							data-content-type="application/json" 
+							data-query-params="" 
+							data-page-number="1" 
+							data-page-size="20" 
+							data-page-list="[5,10,20,30,40,50,100]" 
+							data-resizable="true" 
+							data-response-handler="" 
+							data-maintain-selected="true">
+							<thead>
+								<tr>
+									<th data-field="Name">变量标签</th>
+									<th data-field="statu">变量值</th>
+									<th data-field="MeterNumber">储存时间</th>
+								</tr>
+							</thead>
+						</table>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click:closeModal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../public/js/jquery-3.1.1.min.js"></script>
+	<script src="../../public/js/bootstrap.min.js"></script>
+	<script src="../../public/js/knockout-3.4.1.js"></script>
+	<script src="../../public/js/bootstrap-table.js"></script>
+	<script src="../../public/js/bootstrap-table-zh-CN.js"></script>
+	<script src="../../public/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../../public/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="../../public/js/modal.js"></script>
+	<script src="../../public/js/bootstrap-switch.min.js"></script>
+	<script src="../../public/js/echarts.min.js"></script>
+	<script src="../../public/js/toastr.min.js"></script>
+
+	<script src="../../systemTools/serchHistData/js/serchHistData.js"></script>
+
+</html>
