@@ -2,16 +2,27 @@
 	if(!window.FV) {
 		window.FV = {};
 	}
-
 	var Template = function() {
 		var _template = this;
-		this.showTemplate = ko.observable(true);
-		this.showTemplateTable = ko.observable(false);
-		this.showReport = ko.observable(false);
-		this.showReportTable = ko.observable(false);
+		this.dataTemplate = [];
+		this.editItem = {};
+		this.deleteItem = {};
+		this.deleteItemName = ko.observable();
 		this.templateListKO = ko.observableArray();
 		this.templateList = [];
-		//传输模板
+		this.relevanceTemplateList = ko.observableArray();
+		this.addTemplateItem = {
+			"devTemplate": ko.observable(),
+			"relevanceTemplate": ko.observable(),
+			"remark": ko.observable()
+		};
+		this.editTemplateItem = {
+			"devTemplate": ko.observable(),
+			"id": ko.observable(),
+			"idTemplate": ko.observable(),
+			"relevanceTemplate": ko.observable(),
+			"remark": ko.observable()
+		};
 
 		//转化为KO
 		this.parseTemplateList = function(item) {
@@ -23,20 +34,36 @@
 			_tmp.remark = ko.observable(item.remark);
 			return _tmp;
 		};
-
+		this.parsrrelevanceTemplateList = function(item) {
+			var _tmp = {};
+			_tmp.name = ko.observable(item.name);
+			_tmp.value = ko.observable(item.id);
+			return _tmp;
+		};
 		this.openTemplate = function(item) {
-			_template.showTemplate(true);
-			_template.showTemplateTable(false);
-			_template.showReport(false);
-			_template.showReportTable(false);
+			$.ajax({
+				url: '../frontView/template/template.html',
+				dataType: "html",
+				cache: true,
+				async: false
+			}).done(function(data, textStatus, jqXHR) {
+				$('body').append(data);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				console.log("不能加载上报服务HTML文件");
+			});
+			FV.changePage.showTemplate(true);
+			FV.changePage.showTemplateTable(false);
+			FV.changePage.showReport(false);
+			FV.changePage.showReportTable(false);
 			$('#templateTable').bootstrapTable('removeAll');
-
 			//豆腐块数据
 			var dataTemplateAJAX = $.ajax({
 				url: 'data/dataTemplate.json',
 				type: 'GET',
 				dataType: 'json',
-				success: function(data, textStatus, jqXHR) {},
+				success: function(data, textStatus, jqXHR) {
+					_template.dataTemplate = data;
+				},
 				error: function() {
 					console.log('请求失败')
 				}
@@ -47,7 +74,10 @@
 				type: 'GET',
 				dataType: 'json',
 				success: function(data, textStatus, jqXHR) {
-
+					_template.relevanceTemplateList.removeAll();
+					$.each(data, function(index, value) {
+						_template.relevanceTemplateList.push(_template.parsrrelevanceTemplateList(value));
+					});
 				},
 				error: function() {
 					console.log('请求失败')
@@ -67,110 +97,70 @@
 						}
 					}
 					_template.templateList.push(_tmp);
-				}
+				};
 				$.each(_template.templateList, function(index, value) {
 					_template.templateListKO.push(_template.parseTemplateList(value));
 				});
 			})
-		};
-
-		this.openTemplate();
-
-		this.addTemplateContent = {
-			devTemplate: ko.observable(''),
-			relevanceTemplate: ko.observable(''),
-			remark: ko.observable('')
-		}
-		this.addTemplate = function() {
-			$('#addTemplate').modal('show');
-		};
-		this.editTemplate = function(item) {
-			$('#editTemplate').modal('show');
-		};
-		this.deleteTemplate = function(item) {
-			$('#deleteTemplate').modal('show');
-		}
-
-		this.openReport = function() {
-			$.ajax({
-				url: '../frontView/template/report.html',
-				dataType: "html",
-				cache: true,
-				async: false
-			}).done(function(data, textStatus, jqXHR) {
-				$('body').append(data);
-
-			}).fail(function(jqXHR, textStatus, errorThrown) {
-				console.log("不能加载上报服务HTML文件");
-			});
-
-			_template.showTemplate(false);
-			_template.showTemplateTable(false);
-			_template.showReport(true);
-			_template.showReportTable(false);
-
-			//清除表格数据
-			$('#templateTable').bootstrapTable('removeAll');
-		};
-
-		//传输模板表格
-		this.templateTableTitle = ko.observable('');
-		this.dataTemplateVariant = []; //模板数据列表
-		this.deviceVariantList = []; //设备变量与变量标签列表
-		this.templateTableList = []; //表格的列表
-		//整合2个list的数据到新数组 用于表格
-		var parseTemplateTableList = function(name, data) {
-			for(var i = 0; i < name.length; i++) {
-				var _tmp = {};
-				_tmp.name = name[i].name;
-				_tmp.deviceCode = data[i].deviceCode;
-				_tmp.histReport = data[i].histReport;
-				_tmp.stepChangeThreshold = data[i].stepChangeThreshold;
-				_tmp.slopeChangeThreshold = data[i].slopeChangeThreshold;
-				_template.templateTableList.push(_tmp);
-			}
-		}
-
-		this.openTemplateTable = function(item) {
-			_template.showTemplate(false);
-			_template.showTemplateTable(true);
-			_template.showReport(false);
-			_template.showReportTable(false);
-			_template.templateTableTitle(item.devTemplate()); //表格页面标题头
-
-			var dataAJAX = $.ajax({
-				url: 'data/dataTemplateVariant.json',
-				type: 'GET',
-				dataType: 'json',
-				success: function(data, textStatus, jqXHR) {
-					_template.dataTemplateVariant = data;
-				},
-				error: function() {
-					console.log('请求失败')
-				}
-			});
-
-			var nameAJAX = $.ajax({
-				url: 'data/deviceVariantList.json',
-				type: 'GET',
-				dataType: 'json',
-				success: function(data, textStatus, jqXHR) {
-					_template.deviceVariantList = data;
-				},
-				error: function() {
-					console.log('请求失败')
-				}
-			});
-
-			$.when(dataAJAX, nameAJAX).done(function(data, name) {
-				parseTemplateTableList(_template.deviceVariantList, _template.dataTemplateVariant);
-				console.log(_template.templateTableList)
-				$('#templateTable').bootstrapTable({
-					data: _template.templateTableList
-				})
+			$('.modal').on('show.bs.modal', function() {
+				$('#wrapper').css('position', 'static');
+			})
+			$('.modal').on('hidden.bs.modal', function() {
+				$('#wrapper').css('position', 'fixed');
 			})
 		};
+		this.openTemplate();
+
+		this.addTemplate = function() {
+			$('#addTemplate').modal('hide');
+			var _addItem = {};
+			_addItem.devTemplate = _template.addTemplateItem.devTemplate();
+			_addItem.relevanceTemplate = ko.computed(function() {
+				for(var i = 0; i < _template.relevanceTemplateList().length; i++) {
+					if(_template.addTemplateItem.relevanceTemplate() == _template.relevanceTemplateList()[i].value()) {
+						return _template.relevanceTemplateList()[i].name()
+					}
+				}
+			});
+			_addItem.remark = _template.addTemplateItem.remark();
+			_template.templateListKO.push(_addItem);
+
+			//清空模态框数据
+			_template.addTemplateItem.devTemplate('');
+			_template.addTemplateItem.remark('');
+			_template.addTemplateItem.relevanceTemplate('');
+		};
+		this.editTemplateModal = function(item) {
+			_template.item = item;//item存在全局变量里  修改
+			_template.editTemplateItem.devTemplate(item.devTemplate());
+			_template.editTemplateItem.id(item.id());
+			_template.editTemplateItem.idTemplate(item.idTemplate());
+			_template.editTemplateItem.relevanceTemplate(item.relevanceTemplate());
+			_template.editTemplateItem.remark(item.remark());
+			$('#editTemplate').modal('show');
+		};
+		this.editTemplate = function() {
+			_template.item.devTemplate(_template.editTemplateItem.devTemplate())
+			var _editData = {};
+			_editData.devTemplate = _template.editTemplateItem.devTemplate();
+			_editData.relevanceTemplate = _template.editTemplateItem.relevanceTemplate();
+			_editData.remark = _template.editTemplateItem.remark();
+			_editData.id = _template.editTemplateItem.id();
+			_editData.idTemplate = _template.editTemplateItem.idTemplate();
+			//_editData传输给后台的数据
+			$('#editTemplate').modal('hide');
+		};
+		
+		
+		this.deleteTemplateModal = function(item) {
+			$('#deleteTemplate').modal('show');
+			_template.deleteItem = item;
+			_template.deleteItemName(item.devTemplate());
+		};
+		this.deleteTemplate = function(){
+			$('#deleteTemplate').modal('hide');
+			var deleteID = _template.deleteItem.id();//发给后台然后重新请求
+		}
 	};
-	
 	FV.template = new Template();
 }(jQuery));

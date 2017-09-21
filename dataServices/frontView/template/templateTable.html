@@ -1,0 +1,207 @@
+<script type="text/html" id="template-templateTable">
+	<!-- 传输模板-表格-添加变量 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="addTemplateTable">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备变量:</label>
+						<select type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options:templateTable.nameSelectList, optionsText:'name', optionsValue:'name',value:templateTable.addTemTabItem.name,event:{change:templateTable.addChange}">
+						</select>
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备变量:</label>
+						<input type="text" readonly="readonly" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.addTemTabItem.deviceCode" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">历史上报:</label>
+						<input type="checkbox" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="checked:templateTable.addTemTabItem.histReport" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">阶跃阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.addTemTabItem.stepChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">斜率阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.addTemTabItem.slopeChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-sm btn-success" data-bind="click:templateTable.addTemplateTable">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-表格-添加变量 -->
+	<!-- 传输模板-表格-添加所有变量 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="addAllTemplateTable">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">添加所有变量</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<label class="control-label col-xs-3 col-md-3">历史上报:</label>
+						<input type="checkbox" class="col-xs-offset-1 col-xs-6 col-md-offset-0 col-md-6" data-bind="checked:templateTable.addAllTemTabItem.histReport" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+
+						<label class="control-label col-xs-12 col-md-3 align-left">阶跃阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.addAllTemTabItem.stepChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">斜率阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.addAllTemTabItem.slopeChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-sm btn-success" data-bind="click:templateTable.addAllTemplateTable">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-表格-添加所有变量 -->
+	<!-- 传输模板-表格-修改变量 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="editTemplateTable">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">修改变量</h4>
+				</div>
+				<div class="modal-body">
+					<!--没选择-->
+					<!-- ko if: FV.templateTable.editOption.editNone-->
+					<p>请选择要修改的设备变量</p>
+					<!--/ko-->
+					<!--选择一个-->
+					<!-- ko if: FV.templateTable.editOption.editOne-->
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">历史上报:</label>
+						<input type="checkbox" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.editTemTabItem.histReport" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">阶跃阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.editTemTabItem.stepChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">斜率阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.editTemTabItem.slopeChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<!--/ko-->
+					<!--选择多个-->
+					<!-- ko if: FV.templateTable.editOption.editMulti-->
+					<div class="row">
+						<input type="checkbox" class="col-xs-1 col-md-1" data-bind="checked:templateTable.editCheck.histReport" />
+						<label class="control-label col-xs-12 col-md-3 align-left">历史上报:</label>
+						<input type="checkbox" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.editTemTabItem.histReport" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<div class="row">
+						<input type="checkbox" class="col-xs-1 col-md-1" data-bind="checked:templateTable.editCheck.step" />
+						<label class="control-label col-xs-12 col-md-3 align-left">阶跃阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.editTemTabItem.stepChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<div class="row">
+						<input type="checkbox" class="col-xs-1 col-md-1" data-bind="checked:templateTable.editCheck.slope" />
+						<label class="control-label col-xs-12 col-md-3 align-left">斜率阈值:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:templateTable.editTemTabItem.slopeChangeThreshold" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<!--/ko-->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-sm btn-success" data-bind="click:templateTable.editTemplateTable">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-表格-修改变量 -->
+	<!-- 传输模板-表格-删除变量 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="deleteTemplateTable">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">删除变量</h4>
+				</div>
+				<div class="modal-body">
+					<p>确认删除所选中的变量吗?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-sm btn-success" data-bind="click:templateTable.deleteTemplateTable">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-表格-删除变量 -->
+	<div class="content-header">
+		<span data-bind="text:templateTable.templateTableTitle"></span>
+	</div>
+	<div>
+		<div id="toolbar" class="btn-group">
+			<button id="add_variant" type="button" class="btn btn-default" data-bind="click:templateTable.addTemplateTableModal"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#286090"></span>&nbsp;添加变量</button>
+			<button id="add_all_variant" class='btn btn-default' data-bind="click:templateTable.addAllTemplateTableModal"><span class='glyphicon glyphicon-plus-sign' style='color:#283eb7'></span>&nbsp;添加所有变量 </button>
+			<button id="edit_variant" class='btn btn-default' data-bind="click:templateTable.editTemplateTableModal"><span class='glyphicon glyphicon-pencil' style='color:#28b779'></span>&nbsp;修改变量 </button>
+			<button id="delete_variant" class='btn btn-default' data-bind="click:templateTable.deleteTemplateTableModal"><span class='glyphicon glyphicon-remove' style='color:#d9534f'></span>&nbsp;删除 </button>
+		</div>
+
+		<table id="templateTable" data-click-to-select="true" data-pagination="true" data-show-toggle="true" data-show-columns="true" data-sortable="false" data-silent-sort="false" data-striped="true" data-click-to-select="false" data-cache="false" data-content-type="application/json" data-query-params="" data-page-number="1" data-page-size="20" data-page-list="[5,10,20,30,40,50,100]" data-resizable="true" data-response-handler="" data-unique-id="Code" data-maintain-selected="true" data-toolbar="#toolbar">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th data-field="name">设备变量</th>
+					<th data-field="deviceCode">变量标签</th>
+					<th data-field="">传输标签</th>
+					<th data-field="histReport">历史数据上报</th>
+					<th data-field="stepChangeThreshold">阶跃阈值</th>
+					<th data-field="slopeChangeThreshold">斜率阈值</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>

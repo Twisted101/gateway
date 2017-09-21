@@ -101,7 +101,7 @@
 				</div>
 				<div class="modal-body" style="padding-left:50px;">
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">设备名称</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">设备名称:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: Name, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko ifnot: Name.hasError -->
@@ -117,7 +117,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="control-label col-xs-12 col-md-3 align-left">表号</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">表号:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: MeterNumber, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko ifnot: MeterNumber.hasError -->
@@ -133,15 +133,15 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="control-label col-xs-12 col-md-3 align-left">接口</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">接口:</label>
 						<select data-bind="options: undfan.serialSetting.serialDataList, optionsText:'name', optionsValue:'interfaceId', value: InterfaceId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
 					</div>
 					<div class="row">
-						<label class="control-label col-xs-12 col-md-3 align-left">设备模板</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">设备模板:</label>
 						<select data-bind="options: undfan.deviceTemplate.deviceTemplateList, optionsText:'name', optionsValue:'id', value: TemplateId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
 					</div>
 					<div class="row">
-						<label class="control-label col-xs-12 col-md-3 align-left">采集周期</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">采集周期:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-8 col-md-offset-0 col-md-6" data-bind="value: Period, valueUpdate: 'keyup'" />
 						<span class="col-xs-1 control-label " style="text-align:left ;color:green">秒</span>
 						<div class="col-xs-1 control-tip">
@@ -158,7 +158,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="control-label col-xs-12 col-md-3 align-left">离线超时</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">离线超时:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-8 col-md-offset-0 col-md-6" data-bind="value: Timeout, valueUpdate: 'keyup'" />
 						<span class="col-xs-1 control-label " style="text-align:left ;color:green">秒</span>
 						<div class="col-xs-1 control-tip">
@@ -175,7 +175,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="control-label col-xs-12 col-md-3 align-left">安装地址</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">安装地址:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: InstallAddress, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko if: InstallAddress.hasError -->
@@ -186,7 +186,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="control-label col-xs-12 col-md-3 align-left">备注信息</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: Remark, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko if: Remark.hasError -->
@@ -235,7 +235,7 @@
 					<!-- 编辑一个变量 -->
 					<!-- ko if: isEditOne -->
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">设备名称</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">设备名称:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.Name, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko ifnot: editItem.Name.hasError -->
@@ -251,7 +251,7 @@
 						</div>
 					</div>
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">表号</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">表号:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.MeterNumber, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko ifnot: editItem.MeterNumber.hasError -->
@@ -267,15 +267,15 @@
 						</div>
 					</div>
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">接口</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">接口:</label>
 						<select data-bind="options: undfan.serialSetting.serialDataList, optionsText:'interfaceName', optionsValue:'interfaceId', value: editItem.InterfaceId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
 					</div>
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">设备模板</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">设备模板:</label>
 						<select data-bind="options: undfan.deviceTemplate.deviceTemplateList, optionsText:'Name', optionsValue:'id', value: editItem.TemplateId" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7"></select>
 					</div>
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">采集周期</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">采集周期:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: editItem.Period, valueUpdate: 'keyup'" />
 						<div class="col-xs-1 control-tip">
 							<!-- ko ifnot: editItem.Period.hasError -->
@@ -292,7 +292,7 @@
 						<span class="col-xs-2 control-label " style="text-align:left ;color:green">秒</span>
 					</div>
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">离线超时</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">离线超时:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: editItem.Timeout, valueUpdate: 'keyup'" />
 						<div class="col-xs-1 control-tip">
 							<!-- ko ifnot: editItem.Timeout.hasError -->
@@ -309,7 +309,7 @@
 						<span class="col-xs-2 control-label " style="text-align:left ;color:green">秒</span>
 					</div>
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">安装地址</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">安装地址:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.InstallAddress, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 
@@ -321,7 +321,7 @@
 						</div>
 					</div>
 					<div class="row" style="line-height: 30px;">
-						<label class="control-label col-xs-12 col-md-3 align-left">备注信息</label>
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: editItem.Remark, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko if: editItem.Remark.hasError -->
@@ -337,7 +337,7 @@
 					<!-- ko ifnot: isEditOne -->
 					<div class="row" style="line-height: 30px;">
 						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditPeriod" type="checkbox">
-						<label class="control-label col-xs-10 col-md-3 align-left">采集周期</label>
+						<label class="control-label col-xs-10 col-md-3 align-left">采集周期:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: multipleEditPeriod, valueUpdate: 'keyup'" />
 						<div class="col-xs-1 control-tip">
 							<!-- ko ifnot: multipleEditPeriod.hasError -->
@@ -355,7 +355,7 @@
 					</div>
 					<div class="row" style="line-height: 30px;">
 						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditTimeout" type="checkbox">
-						<label class="control-label col-xs-10 col-md-3 align-left">离线超时</label>
+						<label class="control-label col-xs-10 col-md-3 align-left">离线超时:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-7 col-md-offset-0 col-md-5" data-bind="value: multipleEditTimeout, valueUpdate: 'keyup'" />
 						<div class=" col-xs-1 control-tip">
 							<!-- ko ifnot: multipleEditTimeout.hasError -->
@@ -373,7 +373,7 @@
 					</div>
 					<div class="row" style="line-height: 30px;">
 						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditInstallAddress" type="checkbox">
-						<label class="control-label col-xs-10 col-md-3 align-left">安装地址</label>
+						<label class="control-label col-xs-10 col-md-3 align-left">安装地址:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditInstallAddress, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 							<!-- ko if: multipleEditInstallAddress.hasError -->
@@ -385,7 +385,7 @@
 					</div>
 					<div class="row" style="line-height: 30px;">
 						<input class="col-xs-2" style="width: 23px;height: 23px;" data-bind="checked: isMultipleEditRemark" type="checkbox">
-						<label class="control-label col-xs-10 col-md-3 align-left">备注信息</label>
+						<label class="control-label col-xs-10 col-md-3 align-left">备注信息:</label>
 						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value: multipleEditRemark, valueUpdate: 'keyup'" />
 						<div class="col-sm-2 col-xs-2 control-tip">
 

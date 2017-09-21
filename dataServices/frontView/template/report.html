@@ -1,5 +1,113 @@
 <script type="text/html" id="template-report">
+	<!-- 上报服务-添加 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="addReport">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">添加上报服务</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row" style="line-height: 30px;">
+						<label class="control-label col-xs-12 col-md-3 align-left">:</label>
+						<input type="text" style="height: 30px;" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-添加  -->
+	<!-- 传输模板-编辑 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="editReport">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">编辑传输模板</h4>
+				</div>
+				<div class="modal-body">
+					<p>添加变量</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-编辑  -->
+	<!-- 传输模板-删除 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="deleteReport">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">编辑传输模板</h4>
+				</div>
+				<div class="modal-body">
+					<p>删除变量</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-删除  -->
 	<div>
-		<h1 data-bind="text:FV.report.aaa">上报服务豆腐块页面</h1>
+		<div class="content-header">
+			<span>上报服务</span>
+			<button class="btn btn-primary" data-bind="click:report.addTemplate">添加上报服务</button>
+		</div>
+		<div class="row">
+			<!-- ko foreach: FV.report.reportListKO -->
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				<div class="undfan-ibox">
+					<div class="undfan-ibox-title">
+						<div class="undfan-ibox-icon">
+							<span class="icon-name" data-bind="text:nameSev"></span>
+							<span class="inlinesev" style="color:green" data-bind="visible:showinlinesev">(在线)</span>
+							<span class="outlinesev" style="color:red" data-bind="visible:showoutlinesev">(离线)</span>
+						</div>
+						<div class="undfan-ibox-tools">
+							<span class="glyphicon glyphicon-search undfan-ibox-detail" data-toggle="查询" data-bind="click:FV.reportTable.openReportTable.bind($data)"></span>&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-toggle="编辑" data-bind="click:FV.report.editReport.bind($data)"></span>&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-trash undfan-ibox-trash" title="删除" data-toggle="modal" data-target="#deleteModal" data-bind="click:FV.report.deleteReport.bind($data)"></span>
+						</div>
+					</div>
+					<div class="undfan-ibox-content">
+						<div class="row">
+							<span class="col-xs-4 control-label">上报地址:</span>
+							<span class="col-xs-7 control-label" data-bind="text:addressSev"></span>
+						</div>
+						<div class="row">
+							<span class="col-xs-4 control-label">上报端口:</span>
+							<span class="col-xs-7 control-label" data-bind="text:portSev"></span>
+						</div>
+						<div class="row">
+							<span class="col-xs-4 control-label">上报周期:</span>
+							<span class="col-xs-7 control-label" data-bind="text:timeSev"></span>
+						</div>
+						<div class="row">
+							<span class="col-xs-4 control-label">通讯编码:</span>
+							<span class="col-xs-7 control-label" data-bind="text:szCode"></span>
+						</div>
+						<div class="row">
+							<span class="col-xs-4 control-label">备注信息:</span>
+							<span class="col-xs-7 control-label" data-bind="text:infoSev"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /ko -->
+		</div>
 	</div>
 </script>

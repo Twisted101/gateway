@@ -2,9 +2,13 @@
 	line-height: 30px;
 }
 
+
 .modal-header {
 	padding-left: 25px;
 	font-size: 14px;
+}
+.modal-body{
+	padding-left: 50px;
 }
 
 .modal .modal-body div.row>input,
@@ -15,3 +19,4 @@
 .modal .modal-body div.row i.glyphicon-warning-sign{
 	color: red;
 }
+

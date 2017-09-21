@@ -1,0 +1,27 @@
+<script type="text/html" id="template-reportTable">
+	<div class="content-header">
+		<span data-bind="text:reportTable.title"></span>
+	</div>
+	<div>
+		<div id="toolbar" class="btn-group">
+			<button id="add_variant" type="button" class="btn btn-default" data-bind=""><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#286090"></span>&nbsp;添加变量</button>
+			<button id="add_all_variant" class='btn btn-default' data-bind=""><span class='glyphicon glyphicon-plus-sign' style='color:#283eb7'></span>&nbsp;添加所有变量 </button>
+			<button id="edit_variant" class='btn btn-default' data-bind=""><span class='glyphicon glyphicon-pencil' style='color:#28b779'></span>&nbsp;编辑变量 </button>
+			<button id="delete_variant" class='btn btn-default' data-bind=""><span class='glyphicon glyphicon-remove' style='color:#d9534f'></span>&nbsp;删除 </button>
+		</div>
+
+		<table id="templateTable" data-click-to-select="true" data-pagination="true" data-show-toggle="true" data-show-columns="true" data-sortable="false" data-silent-sort="false" data-striped="true" data-click-to-select="false" data-cache="false" data-content-type="application/json" data-query-params="" data-page-number="1" data-page-size="20" data-page-list="[5,10,20,30,40,50,100]" data-resizable="true" data-response-handler="" data-unique-id="Code" data-maintain-selected="true" data-toolbar="#toolbar">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th data-field="deviceFullName">设备名称</th>
+					<th data-field="nodeCode">结点标签</th>
+					<th data-field="deviceNumber">设备标签</th>
+					<th data-field="devTemplate">传输模板</th>
+					<th data-field="collectName">采集单元</th>
+					<th data-field="remark">备注信息</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</script>

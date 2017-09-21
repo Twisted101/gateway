@@ -1,0 +1,21 @@
+[
+	{
+		"addressSev": "1.1.1.1",
+		"id": 2147538964,
+		"infoSev": "备注一下",
+		"nameSev": "111",
+		"onLine": true,
+		"portSev": 1,
+		"szCode": "A1234567890",
+		"timeSev": 11
+	}, {
+		"addressSev": "1.2.3.3",
+		"id": 2280069193,
+		"infoSev": "备注二",
+		"nameSev": "222",
+		"onLine": false,
+		"portSev": 11,
+		"szCode": "A1112342131",
+		"timeSev": 1111
+	}
+]

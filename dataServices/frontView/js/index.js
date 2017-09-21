@@ -36,7 +36,7 @@
  					}
  				})
  			})(i);
- 		}
+ 		};
  		for(var i = 0; i < dropdownMenuLis.length; i++) {
  			(function(i) {
  				dropdownMenuLis[i].addEventListener('click', function() {
@@ -46,16 +46,14 @@
  					dropdownMenuLis[i].classList.add('chosen-li')
  				})
  			})(i);
- 		}
- 		$('.modal').on('show.bs.modal', function(e) {
+ 		};
+ 		$('.modal').on('show.bs.modal', function() {
  			$('#wrapper').css('position', 'static');
  		})
- 		$('.modal').on('hidden.bs.modal', function(e) {
+ 		$('.modal').on('hidden.bs.modal', function() {
  			$('#wrapper').css('position', 'fixed');
  		})
  	});
- 	
- 	
  	
  		ko.applyBindings(FV);
  }(jQuery));

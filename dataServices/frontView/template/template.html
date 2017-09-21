@@ -1,9 +1,133 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>
+<script type="text/html" id="template-template">
+	<!-- 传输模板-添加 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="addTemplate">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">添加传输模板</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">模板名称:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:template.addTemplateItem.devTemplate" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备模板:</label>
+						<select type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options:template.nameSelectList, optionsText:'name', optionsValue:'value', value:template.addTemplateItem.relevanceTemplate">
+						</select>
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:template.addTemplateItem.remark" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-sm btn-success" data-bind="click:template.addTemplate">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-添加  -->
+	<!-- 传输模板-编辑 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="editTemplate">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">编辑传输模板</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">模板名称:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:template.editTemplateItem.devTemplate" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">设备模板:</label>
+						<select type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="options:template.relevanceTemplateList, optionsText:'name', optionsValue:'value', value:template.editTemplateItem.relevanceTemplate">
+						</select>
+						<div class="col-sm-2 col-xs-2 control-tip">
+						</div>
+					</div>
+					<div class="row">
+						<label class="control-label col-xs-12 col-md-3 align-left">备注信息:</label>
+						<input type="text" class="col-xs-offset-1 col-xs-9 col-md-offset-0 col-md-7" data-bind="value:template.editTemplateItem.remark" />
+						<div class="col-sm-2 col-xs-2 control-tip">
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-sm btn-success" data-bind="click:template.editTemplate">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-编辑  -->
+	<!-- 传输模板-删除 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="deleteTemplate">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">删除传输模板</h4>
+				</div>
+				<div class="modal-body">
+					<p>确认删除 <span style="color:red" data-bind="text:template.deleteItemName"></span> 吗？</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-sm btn-success" data-bind="click:template.deleteTemplate">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /传输模板-删除  -->
+	<div id="template">
+		<div class="content-header">
+			<span>传输模板</span>
+			<button class="btn btn-primary" data-toggle="modal" data-target="#addTemplate">添加传输模板</button>
+		</div>
+		<div class="row">
+			<!-- ko foreach: FV.template.templateListKO -->
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				<div class="undfan-ibox">
+					<div class="undfan-ibox-title">
+						<div class="undfan-ibox-icon">
+							<span class="icon-name" data-bind="text:devTemplate"></span>
+						</div>
+						<div class="undfan-ibox-tools">
+							<span class="glyphicon glyphicon-search undfan-ibox-detail" data-toggle="查询" data-bind="click:FV.templateTable.openTemplateTable.bind($data)"></span>&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-pencil undfan-ibox-edit" data-toggle="编辑" data-bind="click:FV.template.editTemplateModal.bind($data)" data-toggle="modal" data-target="#editTemplate"></span>&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-trash undfan-ibox-trash" title="删除" data-toggle="modal" data-target="#deleteModal" data-bind="click:FV.template.deleteTemplateModal.bind($data)"></span>
+						</div>
+					</div>
+					<div class="undfan-ibox-content">
+						<div class="row">
+							<span class="col-xs-4 control-label">关联模板:</span>
+							<span class="col-xs-7 control-label" data-bind="text:relevanceTemplate"></span>
+						</div>
+						<div class="row">
+							<span class="col-xs-4 control-label">备注信息:</span>
+							<span class="col-xs-7 control-label" data-bind="text:remark"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /ko -->
+		</div>
+	</div>
+</script>
